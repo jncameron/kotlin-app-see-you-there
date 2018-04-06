@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "318360625212",
+    "firebase_url": "https://see-you-there-3995f.firebaseio.com",
+    "project_id": "see-you-there-3995f",
+    "storage_bucket": "see-you-there-3995f.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:318360625212:android:ffe1803dd637cc5b",
+        "android_client_info": {
+          "package_name": "com.example.johncameron.seeyouthere"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "318360625212-0ufq143pgsi1bgfj6m8uq96vapc0df83.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.johncameron.seeyouthere",
+            "certificate_hash": "662b341e8b2fe6a7bb2a1d8eab444a2164abe7ba"
+          }
+        },
+        {
+          "client_id": "318360625212-tjlkul4941issvqphscdup59s8kohq1h.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAieeBgrDt-aySFaG4UlmpFk5Zw7o9FN-A"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "318360625212-tjlkul4941issvqphscdup59s8kohq1h.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
