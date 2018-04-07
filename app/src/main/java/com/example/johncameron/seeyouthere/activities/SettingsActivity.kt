@@ -60,14 +60,7 @@ class SettingsActivity : AppCompatActivity() {
                             .load(image)
                             .placeholder(R.drawable.profile_img)
                             .into(settingsProfileID)
-
-
-
                 }
-
-
-
-
 
             }
 

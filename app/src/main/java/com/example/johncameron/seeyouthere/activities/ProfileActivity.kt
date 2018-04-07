@@ -19,8 +19,10 @@ class ProfileActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_profile)
 
-        supportActionBar!!.title = "Profile"
-        supportActionBar!!.setDisplayHomeAsUpEnabled(true)
+        supportActionBar!!.hide()
+
+//        supportActionBar!!.title = "Profile"
+//        supportActionBar!!.setDisplayHomeAsUpEnabled(true)
 
         if (intent.extras != null) {
             userId = intent.extras.get("userId").toString()
@@ -43,13 +45,14 @@ class ProfileActivity : AppCompatActivity() {
                 var displayName = dataSnapshot!!.child("display_name").value.toString()
                 var status = dataSnapshot!!.child("status").value.toString()
                 var image = dataSnapshot!!.child("image").value.toString()
+                var eap = dataSnapshot!!.child("eap").value.toString()
 
                 profileName.text = displayName
-                profileStatus.text = status
+                profileEAP.text = eap
 
                 Picasso.with(this@ProfileActivity)
                         .load(image)
-                        .placeholder(R.drawable.happy_woman)
+                        .placeholder(R.drawable.profile_img)
                         .into(profilePicture)
 
 

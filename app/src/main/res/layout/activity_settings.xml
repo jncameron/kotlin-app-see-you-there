@@ -8,13 +8,13 @@
     tools:context="com.example.johncameron.seeyouthere.activities.SettingsActivity">
 
 
-    <de.hdodenhof.circleimageview.CircleImageView
+    <ImageView
         android:id="@+id/settingsProfileID"
-        android:layout_width="155dp"
-        android:layout_height="129dp"
+        android:layout_width="200dp"
+        android:layout_height="200dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="24dp"
         android:src="@drawable/profile_img"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

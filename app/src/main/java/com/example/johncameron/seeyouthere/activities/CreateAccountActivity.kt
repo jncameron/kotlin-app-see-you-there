@@ -64,6 +64,7 @@ class CreateAccountActivity : AppCompatActivity() {
                         userObject.put("status", "Hello there....")
                         userObject.put("image", "default")
                         userObject.put("thumb_image", "default")
+                        userObject.put("eap", "EAP 5")
 
                         mDatabase!!.setValue(userObject).addOnCompleteListener {
                             task: Task<Void> ->
