@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/darkBg"
+    android:background="@color/lightBg"
     tools:context="com.example.johncameron.seeyouthere.activities.SettingsActivity">
 
 
@@ -21,12 +21,12 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/settinsDisplayName"
+        android:id="@+id/settingsDisplayName"
         android:layout_width="165dp"
         android:layout_height="30dp"
         android:layout_marginTop="20dp"
         android:text="Display Name"
-        android:textColor="@android:color/white"
+        android:textColor="@android:color/black"
         android:textAlignment="center"
         android:textSize="18sp"
         android:textStyle="bold"
@@ -35,45 +35,73 @@
         app:layout_constraintTop_toBottomOf="@+id/settingsProfileID" />
 
     <TextView
-        android:id="@+id/settingsStatusText"
+        android:id="@+id/settingsStatus"
         android:layout_width="312dp"
         android:layout_height="31dp"
-        android:layout_marginTop="8dp"
-        android:text="Hey... I am happy"
+        android:text="Feeling good"
         android:textAlignment="center"
-        android:textColor="@android:color/white"
+        android:textColor="@android:color/black"
         android:textSize="14sp"
         android:textStyle="italic"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/settinsDisplayName" />
+        app:layout_constraintTop_toBottomOf="@+id/settingsDisplayName" />
+
+    <TextView
+        android:id="@+id/settingsCountry"
+        android:layout_width="312dp"
+        android:layout_height="31dp"
+        android:text="USA"
+        android:textAlignment="center"
+        android:textColor="@android:color/black"
+        android:textSize="14sp"
+        android:textStyle="italic"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/settingsStatus" />
+
+    <TextView
+        android:id="@+id/settingsEap"
+        android:layout_width="312dp"
+        android:layout_height="31dp"
+        android:text="EAP Level"
+        android:textAlignment="center"
+        android:textColor="@android:color/black"
+        android:textSize="14sp"
+        android:textStyle="italic"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/settingsCountry" />
 
     <Button
         android:id="@+id/settingsChangeImgBtn"
-        android:layout_width="201dp"
-        android:layout_height="56dp"
+        android:layout_width="196dp"
+        android:layout_height="58dp"
         android:layout_marginTop="32dp"
-        android:textColor="#d3d3d3"
+        android:background="@color/bgColor"
         android:stateListAnimator="@drawable/state_list_animator_z"
         android:text="@string/change_pic"
-        android:background="@drawable/bt_shape"
+        android:textColor="@android:color/background_light"
+        android:textStyle="bold"
         app:layout_constraintHorizontal_bias="0.502"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/settingsStatusText" />
+        app:layout_constraintTop_toBottomOf="@+id/settingsCountry" />
 
     <Button
         android:id="@+id/settingsChangeStatus"
         android:layout_width="196dp"
         android:layout_height="58dp"
         android:layout_marginTop="12dp"
-        android:textColor="#d3d3d3"
-        android:background="@drawable/bt_shape"
-        android:text="@string/change_status"
+        android:background="@color/bgColor"
         android:stateListAnimator="@drawable/state_list_animator_z"
+        android:text="@string/change_status"
+        android:textColor="@color/common_google_signin_btn_text_dark_default"
+        android:textStyle="bold"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/settingsChangeImgBtn" />
+
 
 
 </android.support.constraint.ConstraintLayout>

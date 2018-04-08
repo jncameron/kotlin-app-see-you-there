@@ -10,6 +10,7 @@ class Users() {
     var user_status: String? = null
     var dob: Date? = null
     var eap: String? = null
+    var country: String? = null
     var will_study: String? = null
     var education: String? = null
     var interests: String? = null

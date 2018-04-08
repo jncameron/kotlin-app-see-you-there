@@ -20,9 +20,6 @@ import com.example.johncameron.seeyouthere.activities.ProfileActivity
 import com.example.johncameron.seeyouthere.models.Users
 import java.util.logging.Logger
 
-/**
- * Created by paulodichone on 7/31/17.
- */
 class UsersAdapter(databaseQuery: DatabaseReference, var context: Context)
     :FirebaseRecyclerAdapter<Users, UsersAdapter.ViewHolder>(
         Users::class.java,
@@ -46,7 +43,7 @@ class UsersAdapter(databaseQuery: DatabaseReference, var context: Context)
 
 //            var options = arrayOf("Open Profile", "Send Message")
 //            var builder = AlertDialog.Builder(context)
-//            builder.setTitle("Selecte Options")
+//            builder.setTitle("Select Options")
 //            builder.setItems(options, DialogInterface.OnClickListener { dialogInterface, i ->
 //                var userName = viewHolder.userNameTxt
 //                var userStat = viewHolder.userStatusTxt

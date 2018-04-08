@@ -6,7 +6,13 @@ import android.graphics.Bitmap
 import android.net.Uri
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import android.support.annotation.LayoutRes
+import android.support.design.R.id.container
 import android.util.Log
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
+import android.widget.LinearLayout
 import android.widget.Toast
 import com.google.android.gms.tasks.Task
 import com.google.firebase.auth.FirebaseAuth
@@ -23,16 +29,26 @@ import com.example.johncameron.seeyouthere.R
 import java.io.ByteArrayOutputStream
 import java.io.File
 
+import kotlinx.android.synthetic.main.activity_main.view.*
+import kotlinx.android.synthetic.main.activity_user_info.view.*
+
+
 class SettingsActivity : AppCompatActivity() {
     var mDatabase: DatabaseReference? = null
     var mCurrentUser: FirebaseUser? = null
     var mStorageRef: StorageReference? = null
     var GALLERY_ID: Int = 1
 
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_settings)
 
+        fun ViewGroup.inflate(@LayoutRes layoutRes: Int, attachToRoot: Boolean = false): View {
+            return LayoutInflater.from(context).inflate(layoutRes, this, attachToRoot)
+
+        }
 
         mCurrentUser = FirebaseAuth.getInstance().currentUser
         mStorageRef = FirebaseStorage.getInstance().reference
@@ -50,10 +66,14 @@ class SettingsActivity : AppCompatActivity() {
                 var displayName = dataSnapshot!!.child("display_name").value
                 var image = dataSnapshot!!.child("image").value.toString()
                 var userStatus = dataSnapshot!!.child("status").value
+                var userEap = dataSnapshot!!.child("eap").value
+                var userCountry = dataSnapshot!!.child("country").value
                 var thumbnail = dataSnapshot!!.child("thumb_image").value
 
-                settinsDisplayName.text = displayName.toString()
-                settingsStatusText.text = userStatus.toString()
+                settingsDisplayName.text = displayName.toString()
+                settingsStatus.text = userStatus.toString()
+                settingsEap.text = userEap.toString()
+                settingsCountry.text = userCountry.toString()
 
                 if (!image!!.equals("default")) {
                     Picasso.with(applicationContext)
@@ -72,9 +92,17 @@ class SettingsActivity : AppCompatActivity() {
 
 
         settingsChangeStatus.setOnClickListener {
-            var intent = Intent(this, StatusActivity::class.java)
-            intent.putExtra("status", settingsStatusText.text.toString().trim())
+
+            var intent = Intent(this, UserInfoActivity::class.java)
+            intent.putExtra("status", settingsStatus.text.toString().trim())
+            intent.putExtra("eap", settingsEap.text.toString().trim())
+            intent.putExtra("country", settingsCountry.text.toString().trim())
             startActivity(intent)
+
+
+
+
+
 
         }
 
