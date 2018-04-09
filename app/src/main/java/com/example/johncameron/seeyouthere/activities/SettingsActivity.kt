@@ -94,6 +94,7 @@ class SettingsActivity : AppCompatActivity() {
         settingsChangeStatus.setOnClickListener {
 
             var intent = Intent(this, UserInfoActivity::class.java)
+            intent.putExtra("display_name", settingsDisplayName.text.toString().trim())
             intent.putExtra("status", settingsStatus.text.toString().trim())
             intent.putExtra("eap", settingsEap.text.toString().trim())
             intent.putExtra("country", settingsCountry.text.toString().trim())

@@ -40,20 +40,20 @@ class ChatActivity : AppCompatActivity() {
         mLinearLayoutManager = LinearLayoutManager(this)
         mLinearLayoutManager!!.stackFromEnd = true
 
-        supportActionBar!!.setDisplayHomeAsUpEnabled(true)
-        supportActionBar!!.setDisplayShowCustomEnabled(true)
+        //supportActionBar!!.setDisplayHomeAsUpEnabled(true)
+        //supportActionBar!!.setDisplayShowCustomEnabled(true)
 
         var inflater = this.getSystemService(android.content.Context.LAYOUT_INFLATER_SERVICE)
         as LayoutInflater
 
-        var actionBarView = inflater.inflate(R.layout.custom_bar_image, null)
-        actionBarView.customBarName.text = intent.extras.getString("name")
-        Picasso.with(this)
-                .load(profileImgLink)
-                .placeholder(R.drawable.profile_img)
-                .into(actionBarView.customBarCircleImage)
-
-        supportActionBar!!.customView = actionBarView
+//        var actionBarView = inflater.inflate(R.layout.custom_bar_image, null)
+//        actionBarView.customBarName.text = intent.extras.getString("name")
+//        Picasso.with(this)
+//                .load(profileImgLink)
+//                .placeholder(R.drawable.profile_img)
+//                .into(actionBarView.customBarCircleImage)
+//
+//        supportActionBar!!.customView = actionBarView
 
 
 

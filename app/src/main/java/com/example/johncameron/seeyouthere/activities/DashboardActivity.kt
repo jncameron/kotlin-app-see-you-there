@@ -22,7 +22,7 @@ class DashboardActivity : AppCompatActivity() {
 
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_dashboard)
-        supportActionBar!!.title = "Dashboard"
+        // supportActionBar!!.title = "Dashboard"
 
         sectionAdapter = SectionPagerAdapter(supportFragmentManager)
         dashViewPagerId.adapter = sectionAdapter
