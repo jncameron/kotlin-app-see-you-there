@@ -12,11 +12,14 @@ import com.example.johncameron.seeyouthere.R
 import com.example.johncameron.seeyouthere.adapters.SectionPagerAdapter
 import com.google.firebase.auth.FirebaseAuth
 import kotlinx.android.synthetic.main.activity_dashboard.*
+import kotlinx.android.synthetic.main.app_bar_main.*
 
 
 class DashboardActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        setSupportActionBar(toolbar)
+
 
         var sectionAdapter: SectionPagerAdapter? = null
 
