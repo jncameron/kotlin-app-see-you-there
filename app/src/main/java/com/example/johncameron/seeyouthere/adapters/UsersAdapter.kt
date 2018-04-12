@@ -28,6 +28,12 @@ class UsersAdapter(databaseQuery: DatabaseReference, var context: Context)
         databaseQuery
 
 ){
+    override fun getItemCount(): Int {
+        return super.getItemCount()
+    }
+
+
+
     val Log = Logger.getLogger(MainActivity::class.java.name)
     override fun populateViewHolder(viewHolder: UsersAdapter.ViewHolder?, user: Users?, position: Int) {
         var userId = getRef(position).key // the unique firebase keyid for this current user!
@@ -36,39 +42,36 @@ class UsersAdapter(databaseQuery: DatabaseReference, var context: Context)
         viewHolder.itemView.setOnClickListener {
             //Create an AlertDialog to prompt users if they want to see profile or send message
 
-            var profileIntent = Intent(context, ProfileActivity::class.java)
-            profileIntent.putExtra("userId", userId)
-            context.startActivity(profileIntent)
 
 
-//            var options = arrayOf("Open Profile", "Send Message")
-//            var builder = AlertDialog.Builder(context)
-//            builder.setTitle("Select Options")
-//            builder.setItems(options, DialogInterface.OnClickListener { dialogInterface, i ->
-//                var userName = viewHolder.userNameTxt
-//                var userStat = viewHolder.userStatusTxt
-//                var profilePic = viewHolder.userProfilePicLink
-//
-//                if (i == 0) {
-//                    //open user profile
-//
-//                    var profileIntent = Intent(context, ProfileActivity::class.java)
-//                    profileIntent.putExtra("userId", userId)
-//                    context.startActivity(profileIntent)
-//
-//                } else {
-//                    //Send Message/ ChatActivity
-//                    var chatIntent = Intent(context, ChatActivity::class.java)
-//                    chatIntent.putExtra("userId", userId)
-//                    chatIntent.putExtra("name", userName)
-//                    chatIntent.putExtra("status", userStat)
-//                    chatIntent.putExtra("profile", profilePic)
-//                    context.startActivity(chatIntent)
-//                }
-//
-//            })
+            var options = arrayOf("Open Profile", "Send Message")
+            var builder = AlertDialog.Builder(context)
+            builder.setTitle("Select Options")
+            builder.setItems(options, DialogInterface.OnClickListener { dialogInterface, i ->
+                var userName = viewHolder.userNameTxt
+                var userStat = viewHolder.userStatusTxt
+                var profilePic = viewHolder.userProfilePicLink
 
-//            builder.show()
+                if (i == 0) {
+                    //open user profile
+
+                    var profileIntent = Intent(context, ProfileActivity::class.java)
+                    profileIntent.putExtra("userId", userId)
+                    context.startActivity(profileIntent)
+
+                } else {
+                    //Send Message/ ChatActivity
+                    var chatIntent = Intent(context, ChatActivity::class.java)
+                    chatIntent.putExtra("userId", userId)
+                    chatIntent.putExtra("name", userName)
+                    chatIntent.putExtra("status", userStat)
+                    chatIntent.putExtra("profile", profilePic)
+                    context.startActivity(chatIntent)
+                }
+
+            })
+
+            builder.show()
 
         }
 
@@ -97,19 +100,6 @@ class UsersAdapter(databaseQuery: DatabaseReference, var context: Context)
                     .load(userProfilePicLink)
                     .placeholder(R.drawable.profile_img)
                     .into(userProfilePic)
-
-
-
-
-
-
-
-
-
-
-
-
-
 
         }
 

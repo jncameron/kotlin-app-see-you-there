@@ -69,7 +69,7 @@ class CreateAccountActivity : AppCompatActivity() {
                         mDatabase!!.setValue(userObject).addOnCompleteListener {
                             task: Task<Void> ->
                               if (task.isSuccessful) {
-                                   var dashboardIntent = Intent(this, DashboardActivity::class.java)
+                                   var dashboardIntent = Intent(this, HomeActivity::class.java)
                                    dashboardIntent.putExtra("name", displayName)
                                   startActivity(dashboardIntent)
                                   finish()

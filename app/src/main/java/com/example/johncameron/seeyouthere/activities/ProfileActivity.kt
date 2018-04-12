@@ -46,9 +46,13 @@ class ProfileActivity : AppCompatActivity() {
                 var status = dataSnapshot!!.child("status").value.toString()
                 var image = dataSnapshot!!.child("image").value.toString()
                 var eap = dataSnapshot!!.child("eap").value.toString()
+                var country = dataSnapshot!!.child("country").value.toString()
 
                 profileName.text = displayName
                 profileEAP.text = eap
+                profileCountry.text = country
+                profileStatus.text = status
+
 
                 Picasso.with(this@ProfileActivity)
                         .load(image)

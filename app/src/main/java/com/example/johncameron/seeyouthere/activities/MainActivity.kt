@@ -35,7 +35,7 @@ class MainActivity : AppCompatActivity() {
 
             if(user != null) {
                  //Let's go to Dashboard
-                startActivity(Intent(this, DashboardActivity::class.java))
+                startActivity(Intent(this, Main2Activity::class.java))
                 finish()
             }else {
 
