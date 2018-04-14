@@ -2,8 +2,6 @@ package com.example.johncameron.seeyouthere.fragments
 
 
 import android.os.Bundle
-
-
 import android.support.v4.app.Fragment
 import android.support.v7.widget.LinearLayoutManager
 import android.view.LayoutInflater
@@ -16,16 +14,11 @@ import com.google.firebase.database.FirebaseDatabase
 import kotlinx.android.synthetic.main.fragment_users.*
 
 
-
-
-/**
- * A simple [Fragment] subclass.
- */
 class UsersFragment : Fragment() {
     var mUserDatabase: DatabaseReference? = null
-
-
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
+                              savedInstanceState: Bundle?): View? {
         return inflater!!.inflate(R.layout.fragment_users, container, false)
     }
 

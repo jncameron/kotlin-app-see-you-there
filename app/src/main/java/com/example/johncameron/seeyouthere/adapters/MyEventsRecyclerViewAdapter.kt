@@ -1,64 +1,64 @@
 package com.example.johncameron.seeyouthere.adapters
 
+
+
+
+
+import android.content.Context
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import com.example.johncameron.seeyouthere.R
+import com.example.johncameron.seeyouthere.R.id.myEventTitle
+import com.example.johncameron.seeyouthere.models.Events
+import com.firebase.ui.database.FirebaseRecyclerAdapter
+import com.google.firebase.database.DatabaseReference
 
 
-import com.example.johncameron.seeyouthere.fragments.MyEventsFragment.OnListFragmentInteractionListener
-import com.example.johncameron.seeyouthere.dummy.DummyContent.DummyItem
+class MyEventsRecyclerViewAdapter(databaseQuery: DatabaseReference, var context: Context)
+    :FirebaseRecyclerAdapter<Events, MyEventsRecyclerViewAdapter.ViewHolder>(
+        Events::class.java,
+        R.layout.fragment_my_events,
+        MyEventsRecyclerViewAdapter.ViewHolder::class.java,
+        databaseQuery){
 
-import kotlinx.android.synthetic.main.fragment_my_events.view.*
-
-/**
- * [RecyclerView.Adapter] that can display a [DummyItem] and makes a call to the
- * specified [OnListFragmentInteractionListener].
- * TODO: Replace the implementation with code for your data type.
- */
-class MyEventsRecyclerViewAdapter(
-        private val mValues: List<DummyItem>,
-        private val mListener: OnListFragmentInteractionListener?)
-    : RecyclerView.Adapter<MyEventsRecyclerViewAdapter.ViewHolder>() {
-
-    private val mOnClickListener: View.OnClickListener
-
-    init {
-        mOnClickListener = View.OnClickListener { v ->
-            val item = v.tag as DummyItem
-            // Notify the active callbacks interface (the activity, if the fragment is attached to
-            // one) that an item has been selected.
-            mListener?.onListFragmentInteraction(item)
-        }
+    override fun getItemCount(): Int {
+        return super.getItemCount()
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val view = LayoutInflater.from(parent.context)
-                .inflate(R.layout.fragment_my_events, parent, false)
-        return ViewHolder(view)
+    override fun populateViewHolder(myEventsViewHolder: ViewHolder?, event: Events?, position: Int) {
+        myEventsViewHolder!!.bindView(event!!, context)
     }
 
-    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        val item = mValues[position]
-        holder.mIdView.text = item.id
-        holder.mContentView.text = item.content
 
-        with(holder.mView) {
-            tag = item
-            setOnClickListener(mOnClickListener)
+    class ViewHolder(itemView: View): RecyclerView.ViewHolder(itemView) {
+        fun bindView(event: Events, context: Context) {
+
+            var eventName = itemView.findViewById<TextView>(R.id.myEventTitle)
+            var eventLocation = itemView.findViewById<TextView>(R.id.myEventLocation)
+            var eventDetails = itemView.findViewById<TextView>(R.id.myEventDetails)
+            var eventBring = itemView.findViewById<TextView>(R.id.myEventBring)
+            var eventDate = itemView.findViewById<TextView>(R.id.myEventDate)
+            var eventTime = itemView.findViewById<TextView>(R.id.myEventTime)
+            var minAttendees = itemView.findViewById<TextView>(R.id.myEventMin)
+            var maxAttendees = itemView.findViewById<TextView>(R.id.myEventMax)
+
+
+
+
+            eventName.text = event.eventName
+            eventLocation.text = event.eventLocation
+            eventDetails.text = event.eventDetails
+            eventBring.text = event.eventBring
+            eventDate.text = event.eventDate
+            eventTime.text = event.eventTime
+            minAttendees.text = event.minAttendees
+            maxAttendees.text = event.maxAttendees
+
+
         }
-    }
 
-    override fun getItemCount(): Int = mValues.size
-
-    inner class ViewHolder(val mView: View) : RecyclerView.ViewHolder(mView) {
-        val mIdView: TextView = mView.item_number
-        val mContentView: TextView = mView.content
-
-        override fun toString(): String {
-            return super.toString() + " '" + mContentView.text + "'"
-        }
     }
 }

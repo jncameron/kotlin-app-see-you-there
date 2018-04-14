@@ -13,9 +13,8 @@
 
         <FrameLayout
             android:id="@+id/fragment_holder"
-            android:layout_marginTop="52dp"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="match_parent">
         </FrameLayout>
 
     </LinearLayout>
@@ -28,7 +27,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="bottom"
         android:background="?android:attr/windowBackground"
-        app:itemBackground="@color/bgColor"
+        app:itemBackground="@color/colorPrimaryDark"
         android:foreground="?attr/selectableItemBackground"
         app:itemIconTint="@android:color/white"
         app:itemTextColor="@android:color/white"

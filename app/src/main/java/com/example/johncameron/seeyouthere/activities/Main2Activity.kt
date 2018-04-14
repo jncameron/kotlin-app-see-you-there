@@ -5,29 +5,18 @@ import android.os.Bundle
 import android.support.design.widget.BottomNavigationView
 import android.support.v7.app.AppCompatActivity
 import com.example.johncameron.seeyouthere.R
-import com.example.johncameron.seeyouthere.dummy.DummyContent
 import com.example.johncameron.seeyouthere.fragments.BrowseEventsFragment
 import com.example.johncameron.seeyouthere.fragments.CreateEventFragment
+import com.example.johncameron.seeyouthere.fragments.CreateEventFragment.OnFragmentInteractionListener
 import com.example.johncameron.seeyouthere.fragments.MyEventsFragment
-import com.example.johncameron.seeyouthere.fragments.MyEventsFragment.OnListFragmentInteractionListener
-import com.example.johncameron.seeyouthere.fragments.BrowseEventsFragment.OnListFragmentInteractionListener as BrowseListener
 import com.example.johncameron.seeyouthere.fragments.UsersFragment
 import kotlinx.android.synthetic.main.activity_main2.*
 
-class Main2Activity() : AppCompatActivity(), CreateEventFragment.OnFragmentInteractionListener, OnListFragmentInteractionListener, BrowseListener {
+class Main2Activity() : AppCompatActivity(),
+        OnFragmentInteractionListener{
     override fun onFragmentInteraction(uri: Uri) {
 
     }
-
-    override fun onListFragmentInteraction(item: com.example.johncameron.seeyouthere.activities.dummy.DummyContent.DummyItem?) {
-
-    }
-
-    override fun onListFragmentInteraction(item: DummyContent.DummyItem?) {
-
-    }
-
-
 
     val manager = supportFragmentManager
     private val mOnNavigationItemSelectedListener = BottomNavigationView.OnNavigationItemSelectedListener { item ->
@@ -62,6 +51,8 @@ class Main2Activity() : AppCompatActivity(), CreateEventFragment.OnFragmentInter
         setContentView(R.layout.activity_home)
 
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener)
+
+
     }
 
     fun ShowUsersFragment() {
@@ -91,5 +82,6 @@ class Main2Activity() : AppCompatActivity(), CreateEventFragment.OnFragmentInter
         transaction.replace(R.id.fragment_holder, fragment)
         transaction.commit()
     }
+
 
 }

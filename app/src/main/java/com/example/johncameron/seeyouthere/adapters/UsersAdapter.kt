@@ -5,19 +5,17 @@ import android.content.DialogInterface
 import android.content.Intent
 import android.support.v7.app.AlertDialog
 import android.support.v7.widget.RecyclerView
-import android.util.Log
 import android.view.View
 import android.widget.TextView
-import android.widget.Toast
-import com.firebase.ui.database.FirebaseRecyclerAdapter
-import com.google.firebase.database.DatabaseReference
-import com.squareup.picasso.Picasso
-import de.hdodenhof.circleimageview.CircleImageView
 import com.example.johncameron.seeyouthere.R
 import com.example.johncameron.seeyouthere.activities.ChatActivity
 import com.example.johncameron.seeyouthere.activities.MainActivity
 import com.example.johncameron.seeyouthere.activities.ProfileActivity
 import com.example.johncameron.seeyouthere.models.Users
+import com.firebase.ui.database.FirebaseRecyclerAdapter
+import com.google.firebase.database.DatabaseReference
+import com.squareup.picasso.Picasso
+import de.hdodenhof.circleimageview.CircleImageView
 import java.util.logging.Logger
 
 class UsersAdapter(databaseQuery: DatabaseReference, var context: Context)
@@ -31,7 +29,6 @@ class UsersAdapter(databaseQuery: DatabaseReference, var context: Context)
     override fun getItemCount(): Int {
         return super.getItemCount()
     }
-
 
 
     val Log = Logger.getLogger(MainActivity::class.java.name)

@@ -51,13 +51,6 @@ class CreateAccountActivity : AppCompatActivity() {
                         mDatabase = FirebaseDatabase.getInstance().reference
                                 .child("Users").child(userId)
 
-                        /*
-                            Users
-                                - 77rkdkekkdkd
-                                   - Paulo
-                                   - "hello there"
-                                   - "image url.."
-                         */
 
                         var userObject = HashMap<String, String>()
                         userObject.put("display_name", displayName)
