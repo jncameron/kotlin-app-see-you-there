@@ -155,13 +155,12 @@ class CreateEventFragment : Fragment() {
             var bring = newEventBring.text.toString().trim()
             var date = newEventDate.text.toString().trim()
             var time = newEventTime.text.toString().trim()
-            var min = newEventMinAttendees.text.toString().trim()
-            var max = newEventMaxAttendees.text.toString().trim()
+            var attend = userId.toString()
 
             if (!TextUtils.isEmpty(eventName) && !TextUtils.isEmpty(eventLocation)
                     && !TextUtils.isEmpty(details) && !TextUtils.isEmpty(date)
                     && !TextUtils.isEmpty(time)) {
-                createEvent(eventHost, eventName, eventLocation, details, bring, date, time, min, max)
+                createEvent(eventHost, eventName, eventLocation, details, bring, date, time, attend)
 
             } else {
                 Toast.makeText(context, "Please fill out the fields", Toast.LENGTH_LONG)
@@ -175,7 +174,7 @@ class CreateEventFragment : Fragment() {
     }
 
     fun createEvent(eventHost: String, eventName: String, eventLocation: String, details: String, bring: String,
-                    date: String, time: String, min: String, max: String) {
+                    date: String, time: String, attend: String) {
 
         var newEvent = UUID.randomUUID().toString()
 
@@ -192,12 +191,12 @@ class CreateEventFragment : Fragment() {
         eventObject.put("eventBring", bring)
         eventObject.put("eventDate", date)
         eventObject.put("eventTime", time)
-        eventObject.put("minAttendees", min)
-        eventObject.put("maxAttendees", max)
+ //       eventObject.put("attending", attend)
 
 
 
         mDatabase!!.setValue(eventObject)
+        mDatabase!!.child("attending").push().setValue(attend)
 
     }
 

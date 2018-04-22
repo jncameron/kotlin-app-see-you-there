@@ -145,34 +145,6 @@
                 android:textSize="18sp"
                 app:layout_constraintTop_toBottomOf="@+id/newEventDate" />
 
-            <EditText
-                android:id="@+id/newEventMinAttendees"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@drawable/selector_bg_edit_2"
-                android:hint="Minimum Attendees (optional)"
-                android:inputType="number"
-                android:paddingBottom="10dp"
-                android:textColor="#000"
-                android:textCursorDrawable="@drawable/bg_input_cursor_2"
-                android:textSize="18sp"
-                android:textColorHint="#000"
-                app:layout_constraintTop_toBottomOf="@+id/newEventTime" />
-
-            <EditText
-                android:id="@+id/newEventMaxAttendees"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@drawable/selector_bg_edit_2"
-                android:hint="Maximum Attendees (optional)"
-                android:inputType="number"
-                android:paddingBottom="10dp"
-                android:textColor="#000"
-                android:textCursorDrawable="@drawable/bg_input_cursor_2"
-                android:textSize="18sp"
-                android:textColorHint="#000"
-                app:layout_constraintTop_toBottomOf="@+id/newEventMinAttendees" />
-
 
             <Button
                 android:id="@+id/accountCreateEventBtn"
@@ -189,7 +161,7 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/newEventMaxAttendees" />
+                app:layout_constraintTop_toBottomOf="@+id/newEventTime" />
 
 
         </android.support.constraint.ConstraintLayout>

@@ -7,6 +7,7 @@ import android.support.v7.app.AlertDialog
 import android.support.v7.widget.RecyclerView
 import android.view.View
 import android.widget.TextView
+import android.widget.Toast
 import com.example.johncameron.seeyouthere.R
 import com.example.johncameron.seeyouthere.activities.ChatActivity
 import com.example.johncameron.seeyouthere.activities.MainActivity
@@ -31,11 +32,11 @@ class UsersAdapter(databaseQuery: DatabaseReference, var context: Context)
     }
 
 
-    val Log = Logger.getLogger(MainActivity::class.java.name)
+   // val Log = Logger.getLogger(MainActivity::class.java.name)
+
     override fun populateViewHolder(viewHolder: UsersAdapter.ViewHolder?, user: Users?, position: Int) {
         var userId = getRef(position).key // the unique firebase keyid for this current user!
         viewHolder!!.bindView(user!!, context)
-
         viewHolder.itemView.setOnClickListener {
             //Create an AlertDialog to prompt users if they want to see profile or send message
 
@@ -55,6 +56,7 @@ class UsersAdapter(databaseQuery: DatabaseReference, var context: Context)
                     var profileIntent = Intent(context, ProfileActivity::class.java)
                     profileIntent.putExtra("userId", userId)
                     context.startActivity(profileIntent)
+//                    Toast.makeText(context, userId.toString(), Toast.LENGTH_LONG).show()
 
                 } else {
                     //Send Message/ ChatActivity

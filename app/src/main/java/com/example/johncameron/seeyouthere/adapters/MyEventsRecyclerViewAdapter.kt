@@ -43,7 +43,7 @@ class MyEventsRecyclerViewAdapter(databaseQuery: DatabaseReference, var context:
             var eventDate = itemView.findViewById<TextView>(R.id.myEventDate)
             var eventTime = itemView.findViewById<TextView>(R.id.myEventTime)
             var minAttendees = itemView.findViewById<TextView>(R.id.myEventMin)
-            var maxAttendees = itemView.findViewById<TextView>(R.id.myEventMax)
+
 
 
 
@@ -54,8 +54,7 @@ class MyEventsRecyclerViewAdapter(databaseQuery: DatabaseReference, var context:
             eventBring.text = event.eventBring
             eventDate.text = event.eventDate
             eventTime.text = event.eventTime
-            minAttendees.text = event.minAttendees
-            maxAttendees.text = event.maxAttendees
+//            minAttendees.text = event.attending
 
 
         }

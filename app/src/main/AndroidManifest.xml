@@ -35,7 +35,8 @@
             android:parentActivityName=".activities.HomeActivity" />
         <activity
             android:name=".activities.Main2Activity"
-            android:label="@string/title_activity_main2"></activity>
+            android:label="@string/title_activity_main2" />
+        <activity android:name=".activities.EventActivity"></activity>
     </application>
 
 </manifest>

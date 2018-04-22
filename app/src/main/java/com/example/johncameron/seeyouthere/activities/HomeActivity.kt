@@ -21,7 +21,6 @@ class HomeActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
 
-        var sectionAdapter: SectionPagerAdapter? = null
 
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_home)
