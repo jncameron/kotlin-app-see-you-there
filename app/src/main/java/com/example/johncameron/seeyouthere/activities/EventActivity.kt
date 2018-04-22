@@ -120,6 +120,11 @@ class EventActivity : AppCompatActivity() {
                     userId2 = attendingUsersList[1]
                     userId3 = attendingUsersList[2]
 
+                    var othersAttending = attendingUsersList.size - 4
+                    var othersAttendingTxt = "+$othersAttending"
+
+                    andOthers.text = othersAttendingTxt
+
                     var imageUrl1 = dataSnapshot!!.child("Users").child(userId1).child("thumb_image")?.value.toString()
                     var imageUrl2 = dataSnapshot!!.child("Users").child(userId2).child("thumb_image")?.value.toString()
                     var imageUrl3 = dataSnapshot!!.child("Users").child(userId3).child("thumb_image")?.value.toString()
