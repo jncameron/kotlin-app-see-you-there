@@ -25,11 +25,7 @@ class Main2Activity() : AppCompatActivity(),
     val manager = supportFragmentManager
     private val mOnNavigationItemSelectedListener = BottomNavigationView.OnNavigationItemSelectedListener { item ->
         when (item.itemId) {
-            R.id.nav_home -> {
 
-                return@OnNavigationItemSelectedListener true
-
-            }
             R.id.nav_my_events -> {
                 ShowMyEventsFragment()
                 return@OnNavigationItemSelectedListener true
@@ -53,8 +49,10 @@ class Main2Activity() : AppCompatActivity(),
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_home)
+        supportActionBar!!.title = "See You There"
 
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener)
+        ShowBrowseEventsFragment()
 
 
     }

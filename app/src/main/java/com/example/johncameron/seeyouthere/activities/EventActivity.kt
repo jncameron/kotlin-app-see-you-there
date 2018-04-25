@@ -4,7 +4,6 @@ import android.location.Geocoder
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
-import android.widget.Toast
 import com.example.johncameron.seeyouthere.R
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
@@ -58,7 +57,7 @@ class EventActivity : AppCompatActivity(), OnMapReadyCallback {
                 .findFragmentById(R.id.eventMapFragment) as SupportMapFragment
         mapFragment.getMapAsync(this)
 
-        setUpEvent()
+
 
 
     }
@@ -68,20 +67,15 @@ class EventActivity : AppCompatActivity(), OnMapReadyCallback {
 
         mMap = googleMap
 
+
+        setUpEvent()
         // Add a marker in Sydney and move the camera
 
-        val lat: Double
-        val long: Double
-        var geocodeMatches = Geocoder(this).getFromLocationName("North Strathfield", 1)
 
-        lat = geocodeMatches[0].latitude
-        long = geocodeMatches[0].longitude
+    }
 
+    fun setUpMap() {
 
-        val sydney = LatLng(lat, long)
-        mMap.addMarker(MarkerOptions().position(sydney).title("Marker in Sydney"))
-      //  mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney))
-        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(sydney, 13.0f))
     }
 
     fun setUpEvent() {
@@ -92,6 +86,20 @@ class EventActivity : AppCompatActivity(), OnMapReadyCallback {
                 var eventHost = dataSnapshot!!.child("Events").child(eventId).child("eventHost").value.toString()
                 eventLocation = dataSnapshot!!.child("Events").child(eventId).child("eventLocation").value.toString()
 
+                val lat: Double
+                val long: Double
+                var geocodeMatches = Geocoder(applicationContext).getFromLocationName(eventLocation, 1)
+
+                lat = geocodeMatches[0].latitude
+                long = geocodeMatches[0].longitude
+
+
+                val sydney = LatLng(lat, long)
+                mMap.addMarker(MarkerOptions().position(sydney).title(eventLocation))
+                //  mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney))
+                mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(sydney, 13.0f))
+
+
                 var attendingUsers: DataSnapshot = dataSnapshot!!.child("Events").child(eventId).child("attending")
 
                 var attendingUsersList = arrayListOf<String>()
@@ -101,7 +109,6 @@ class EventActivity : AppCompatActivity(), OnMapReadyCallback {
 
                 }
 
-                Toast.makeText(applicationContext, attendingUsersList.toString(), Toast.LENGTH_LONG).show()
 
 
                 if (attendingUsersList.size == 1) {
@@ -255,8 +262,10 @@ class EventActivity : AppCompatActivity(), OnMapReadyCallback {
 
 
             override fun onCancelled(databaseError: DatabaseError?) {
-                TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+
             }
-        }) 
+        })
+
+
     }
 }

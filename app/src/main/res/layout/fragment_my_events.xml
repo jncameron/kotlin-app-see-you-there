@@ -10,7 +10,7 @@
 
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="8dp"
+        android:layout_margin="16dp"
         app:cardCornerRadius="13dp"
         app:cardElevation="4dp"
         app:cardBackgroundColor="@color/lightPurple">
@@ -35,7 +35,7 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
-                android:id="@+id/myEventLocation"
+                android:id="@+id/myEventHostedBy"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="8dp"
@@ -49,6 +49,22 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/myEventTitle" />
+
+            <TextView
+                android:id="@+id/myEventLocation"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="8dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:background="@drawable/selector_bg_edit_2"
+                android:paddingBottom="10dp"
+                android:text="host"
+                android:textColor="#000"
+                android:textSize="18sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/myEventHostedBy" />
 
             <TextView
                 android:id="@+id/myEventDetails"
@@ -110,7 +126,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/myEventTime" />
 
             <TextView
-                android:id="@+id/myEventMin"
+                android:id="@+id/myAttending"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="8dp"
@@ -123,19 +139,7 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/myEventBring" />
 
-            <TextView
-                android:id="@+id/myEventMax"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="8dp"
-                android:layout_marginStart="8dp"
-                android:background="@drawable/selector_bg_edit_2"
-                android:paddingBottom="10dp"
-                android:textColor="#000"
-                android:textSize="18sp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/myEventMin" />
+
         </android.support.constraint.ConstraintLayout>
 
 

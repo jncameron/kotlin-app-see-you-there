@@ -50,7 +50,7 @@ class LoginActivity : AppCompatActivity() {
                         //paulo@gmail.com split--> [paulo],[gmail.com]
 
                         var username = email.split("@")[0]
-                        var dashboardIntent = Intent(this, HomeActivity::class.java)
+                        var dashboardIntent = Intent(this, Main2Activity::class.java)
                         dashboardIntent.putExtra("name", username)
                         startActivity(dashboardIntent)
                         finish()

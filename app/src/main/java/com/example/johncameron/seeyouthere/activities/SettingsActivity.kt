@@ -8,8 +8,10 @@ import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.support.annotation.LayoutRes
 import android.support.design.R.id.container
+import android.support.design.widget.BottomNavigationView
 import android.util.Log
 import android.view.LayoutInflater
+import android.view.Menu
 import android.view.View
 import android.view.ViewGroup
 import android.widget.LinearLayout
@@ -26,10 +28,15 @@ import com.theartofdev.edmodo.cropper.CropImage
 import id.zelory.compressor.Compressor
 import kotlinx.android.synthetic.main.activity_settings.*
 import com.example.johncameron.seeyouthere.R
+import com.example.johncameron.seeyouthere.fragments.BrowseEventsFragment
+import com.example.johncameron.seeyouthere.fragments.CreateEventFragment
+import com.example.johncameron.seeyouthere.fragments.MyEventsFragment
+import com.example.johncameron.seeyouthere.fragments.UsersFragment
 import java.io.ByteArrayOutputStream
 import java.io.File
 
 import kotlinx.android.synthetic.main.activity_main.view.*
+import kotlinx.android.synthetic.main.activity_main2.*
 import kotlinx.android.synthetic.main.activity_user_info.view.*
 
 
@@ -44,6 +51,7 @@ class SettingsActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_settings)
+
 
         fun ViewGroup.inflate(@LayoutRes layoutRes: Int, attachToRoot: Boolean = false): View {
             return LayoutInflater.from(context).inflate(layoutRes, this, attachToRoot)
@@ -114,6 +122,14 @@ class SettingsActivity : AppCompatActivity() {
             startActivityForResult(Intent.createChooser(galleryIntent, "SELECT_IMAGE"), GALLERY_ID)
         }
 
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        super.onCreateOptionsMenu(menu)
+        menuInflater.inflate(R.menu.main_menu, menu)
+
+
+        return true
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
