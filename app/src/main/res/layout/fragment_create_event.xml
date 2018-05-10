@@ -1,168 +1,175 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+
+
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:background="@drawable/bg3"
+    android:background="@color/lightBg"
     tools:context=".fragments.CreateEventFragment">
 
 
     <android.support.v7.widget.CardView
+        android:id="@+id/newEventCardHeader"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="80dp"
         android:layout_centerInParent="true"
-        android:layout_marginBottom="62dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        app:cardCornerRadius="13dp"
+        app:cardBackgroundColor="@android:color/white"
         app:cardElevation="4dp"
         app:cardUseCompatPadding="true"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/profile_img"/>
+
+    </android.support.v7.widget.CardView>
+
+    <android.support.v7.widget.CardView
+        android:id="@+id/newEventCard"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        app:cardBackgroundColor="@color/bgColor"
+        app:cardUseCompatPadding="true"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/newEventCardHeader">
+
         <android.support.constraint.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@color/lightPurple"
+            android:background="@color/lightBg"
             android:padding="15dp">
-
-            <ImageView
-                android:id="@+id/newEventImg"
-                android:layout_width="80dp"
-                android:layout_height="80dp"
-                android:layout_gravity="center_horizontal"
-                android:layout_marginEnd="8dp"
-                android:layout_marginStart="8dp"
-                android:src="@drawable/ic_add_black_24dp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                tools:layout_editor_absoluteY="15dp" />
-
-            <TextView
-                android:id="@+id/newEventTitle"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="8dp"
-                android:layout_marginStart="8dp"
-                android:layout_marginTop="10dp"
-                android:text="@string/create_event"
-                android:textColor="@color/colorPrimaryDark"
-                android:textSize="18sp"
-                android:textStyle="bold"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/newEventImg" />
 
 
             <EditText
                 android:id="@+id/newEventName"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@drawable/selector_bg_edit_2"
+                android:layout_marginTop="8dp"
+                android:background="@drawable/textview_border"
                 android:hint="@string/new_event_name_hint"
                 android:inputType="text"
                 android:lineSpacingExtra="8sp"
                 android:paddingBottom="10dp"
-                android:textAppearance="@style/TextAppearance.AppCompat"
-                android:textColor="#000"
-                android:textColorHint="#000"
+                android:paddingLeft="5dp"
+                android:paddingRight="5dp"
+                android:paddingTop="10dp"
+                android:textColor="@color/colorPrimaryDark"
+                android:textColorHint="@color/colorPrimaryDark"
                 android:textCursorDrawable="@drawable/bg_input_cursor_2"
                 android:textSize="18sp"
                 android:typeface="normal"
-                app:layout_constraintTop_toBottomOf="@+id/newEventTitle"
-                tools:layout_editor_absoluteX="15dp"
-                tools:textColor="#000" />
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
-            <EditText
+            <TextView
                 android:id="@+id/newEventLocation"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@drawable/selector_bg_edit_2"
-                android:hint="@string/newEventLocationHint"
-                android:inputType="text"
+                android:background="@drawable/textview_border"
                 android:lineSpacingExtra="8sp"
                 android:paddingBottom="10dp"
-                android:textColor="#000"
+                android:paddingLeft="5dp"
+                android:paddingRight="5dp"
+                android:paddingTop="10dp"
+                android:text="Location"
+                android:textColor="@color/colorPrimaryDark"
                 android:textColorHint="#000"
                 android:textCursorDrawable="@drawable/bg_input_cursor_2"
                 android:textSize="18sp"
                 app:layout_constraintTop_toBottomOf="@+id/newEventName"
                 tools:layout_editor_absoluteX="15dp" />
 
-            <EditText
-                android:id="@+id/newEventDetails"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@drawable/selector_bg_edit_2"
-                android:hint="Details"
-                android:inputType="text"
-                android:paddingBottom="10dp"
-                android:textColor="#000"
-                android:textCursorDrawable="@drawable/bg_input_cursor_2"
-                android:textSize="18sp"
-                android:textColorHint="#000"
-                app:layout_constraintTop_toBottomOf="@+id/newEventLocation" />
-
-            <EditText
-                android:id="@+id/newEventBring"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@drawable/selector_bg_edit_2"
-                android:hint="Attendees should bring..."
-                android:inputType="text"
-                android:paddingBottom="10dp"
-                android:textColor="#000"
-                android:textCursorDrawable="@drawable/bg_input_cursor_2"
-                android:textSize="18sp"
-                android:textColorHint="#000"
-                app:layout_constraintTop_toBottomOf="@+id/newEventDetails" />
 
             <TextView
                 android:id="@+id/newEventDate"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@drawable/selector_bg_edit_2"
+                android:background="@drawable/textview_border"
                 android:paddingBottom="10dp"
+                android:paddingLeft="5dp"
+                android:paddingRight="5dp"
+                android:paddingTop="10dp"
                 android:text="Date"
-                android:textColor="#000"
+                android:textColor="@color/colorPrimaryDark"
                 android:textCursorDrawable="@drawable/bg_input_cursor_2"
                 android:textSize="18sp"
-                app:layout_constraintTop_toBottomOf="@+id/newEventBring" />
+                app:layout_constraintTop_toBottomOf="@+id/newEventLocation" />
 
             <TextView
                 android:id="@+id/newEventTime"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@drawable/selector_bg_edit_2"
-                android:text="Time"
+                android:background="@drawable/textview_border"
                 android:paddingBottom="10dp"
-                android:textColor="#000"
+                android:paddingLeft="5dp"
+                android:paddingRight="5dp"
+                android:paddingTop="10dp"
+                android:text="Time"
+                android:textColor="@color/colorPrimaryDark"
                 android:textCursorDrawable="@drawable/bg_input_cursor_2"
                 android:textSize="18sp"
                 app:layout_constraintTop_toBottomOf="@+id/newEventDate" />
 
+            <TextView
+                android:id="@+id/newEventPhoto"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/textview_border"
+                android:lineSpacingExtra="8sp"
+                android:paddingBottom="10dp"
+                android:paddingLeft="5dp"
+                android:paddingRight="5dp"
+                android:paddingTop="10dp"
+                android:text="Display Image"
+                android:textColor="@color/colorPrimaryDark"
+                android:textCursorDrawable="@drawable/bg_input_cursor_2"
+                android:textSize="18sp"
+                app:layout_constraintTop_toBottomOf="@+id/newEventTime"
+                tools:layout_editor_absoluteX="15dp" />
+
+            <EditText
+                android:id="@+id/newEventDetails"
+                android:layout_width="match_parent"
+                android:layout_height="80dp"
+                android:layout_marginTop="16dp"
+                android:background="@drawable/textview_border"
+                android:hint="Details"
+                android:inputType="text"
+                android:paddingBottom="10dp"
+                android:paddingLeft="5dp"
+                android:paddingRight="5dp"
+                android:paddingTop="2dp"
+                android:textColor="@color/colorPrimaryDark"
+                android:textColorHint="@color/colorPrimaryDark"
+                android:textCursorDrawable="@drawable/bg_input_cursor_2"
+                app:layout_constraintTop_toBottomOf="@+id/newEventPhoto"
+                tools:layout_editor_absoluteX="15dp" />
+
 
             <Button
                 android:id="@+id/accountCreateEventBtn"
-                android:layout_width="150dp"
-                android:layout_height="50dp"
+                android:layout_width="140dp"
+                android:layout_height="40dp"
                 android:layout_marginBottom="8dp"
                 android:layout_marginEnd="8dp"
                 android:layout_marginStart="8dp"
-                android:layout_marginTop="8dp"
+                android:layout_marginTop="16dp"
                 android:background="@drawable/bt_shape"
                 android:stateListAnimator="@drawable/state_list_animator_z"
                 android:text="@string/create_event_btn"
-                android:textColor="#000"
+                android:textColor="#FFF"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/newEventTime" />
+                app:layout_constraintTop_toBottomOf="@+id/newEventDetails" />
 
 
         </android.support.constraint.ConstraintLayout>

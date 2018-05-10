@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#6549ea</color>
-    <color name="colorPrimaryDark">#5c44cf</color>
+    <color name="colorPrimary">#00838F</color>
+    <color name="colorPrimaryDark">#006064</color>
     <color name="colorAccent">#4fa881</color>
     <color name="colorIndivateTab">#FFFFFF</color>
     <color name="transparent">#00000000</color>
@@ -10,9 +10,9 @@
     <color name="grey_500">#a4a4a4</color>
     <color name="grey_100">#F5F5F5</color>
     <color name="grey_800">#212121</color>
-    <color name="bgColor">#836cee</color>
+    <color name="bgColor">#b2ebf2</color>
     <color name="lightPurple">#c2baeb</color>
     <color name="darkBg">#222222</color>
-    <color name="lightBg">#e6ebeb</color>
+    <color name="lightBg">#F1F5F7</color>
     <color name="green">#6aa62d</color>
 </resources>

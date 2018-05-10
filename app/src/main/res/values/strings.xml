@@ -21,8 +21,8 @@
     <string name="title_home">Home</string>
     <string name="title_dashboard">Dashboard</string>
     <string name="title_notifications">Notifications</string>
-    <string name="create_event_btn">Create New Event</string>
-    <string name="new_event_name_hint"><i>Event Name</i></string>
-    <string name="newEventLocationHint"><i>Event Location</i></string>
+    <string name="create_event_btn">Create Event</string>
+    <string name="new_event_name_hint">Event Name</string>
+    <string name="newEventLocationHint">Event Location</string>
     <string name="title_activity_maps">Map</string>
 </resources>

@@ -1,25 +1,41 @@
 package com.example.johncameron.seeyouthere.fragments
 
+import android.app.Activity.RESULT_OK
 import android.app.DatePickerDialog
 import android.app.TimePickerDialog
 import android.content.Context
+import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
+import android.support.annotation.NonNull
 import android.support.v4.app.Fragment
+import android.support.v4.app.FragmentActivity
 import android.text.TextUtils
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
 import com.example.johncameron.seeyouthere.R
+import com.example.johncameron.seeyouthere.activities.Main2Activity
+import com.google.android.gms.common.api.GoogleApiClient
+import com.google.android.gms.location.places.ui.PlacePicker
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.database.*
 import kotlinx.android.synthetic.main.fragment_create_event.*
+import org.w3c.dom.Text
 import java.text.SimpleDateFormat
 import java.util.*
 import kotlin.collections.HashMap
+import com.google.android.gms.common.GooglePlayServicesNotAvailableException
+import com.google.android.gms.common.GooglePlayServicesRepairableException
+import com.example.johncameron.seeyouthere.activities.MainActivity
+import com.google.android.gms.location.places.*
+import com.google.android.gms.tasks.OnCompleteListener
+import com.google.android.gms.tasks.Task
+
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -40,11 +56,18 @@ class CreateEventFragment : Fragment() {
     var mAuth: FirebaseAuth? = null
     var mDatabase: DatabaseReference? = null
     var mCurrentUser: FirebaseUser? = null
+    var mGoogleApiClient: GoogleApiClient? = null
+    var mGeoDataClient: GeoDataClient? = null
+    val PLACE_PICKER_REQUEST = 1
+
 
 
 
     private lateinit var textViewDate: TextView
     private lateinit var textViewTime: TextView
+    private lateinit var textViewLocation: TextView
+    private lateinit var textViewPhoto: TextView
+    private lateinit var imageView: ImageView
     // TODO: Rename and change types of parameters
     private var param1: String? = null
     private var param2: String? = null
@@ -103,6 +126,35 @@ class CreateEventFragment : Fragment() {
         textViewTime.setOnClickListener {
             TimePickerDialog(context, timeSetListener, cal.get(Calendar.HOUR_OF_DAY), cal.get(Calendar.MINUTE), true).show()
         }
+
+
+        mGoogleApiClient = GoogleApiClient.Builder(context!!)
+                .addApi(Places.GEO_DATA_API)
+                .addApi(Places.PLACE_DETECTION_API)
+                .enableAutoManage(FragmentActivity(), null)
+                .build()
+
+        textViewLocation = newEventLocation
+        textViewLocation.setOnClickListener {
+
+            var builder = PlacePicker.IntentBuilder()
+            try {
+                startActivityForResult(builder.build(activity), PLACE_PICKER_REQUEST)
+            } catch (e: GooglePlayServicesRepairableException) {
+                e.printStackTrace()
+            } catch (e: GooglePlayServicesNotAvailableException) {
+                e.printStackTrace()
+            }
+
+        }
+
+
+        textViewPhoto = newEventPhoto
+        textViewPhoto.setOnClickListener {
+            getPhotos()
+        }
+
+
         textViewDate = newEventDate
 
         mCurrentUser = FirebaseAuth.getInstance().currentUser
@@ -152,7 +204,6 @@ class CreateEventFragment : Fragment() {
             var eventName = newEventName.text.toString().trim()
             var eventLocation = newEventLocation.text.toString().trim()
             var details = newEventDetails.text.toString().trim()
-            var bring = newEventBring.text.toString().trim()
             var date = newEventDate.text.toString().trim()
             var time = newEventTime.text.toString().trim()
             var attend = userId.toString()
@@ -160,7 +211,7 @@ class CreateEventFragment : Fragment() {
             if (!TextUtils.isEmpty(eventName) && !TextUtils.isEmpty(eventLocation)
                     && !TextUtils.isEmpty(details) && !TextUtils.isEmpty(date)
                     && !TextUtils.isEmpty(time)) {
-                createEvent(eventHost, eventName, eventLocation, details, bring, date, time, attend)
+                createEvent(eventHost, eventName, eventLocation, details, date, time, attend)
 
             } else {
                 Toast.makeText(context, "Please fill out the fields", Toast.LENGTH_LONG)
@@ -173,7 +224,26 @@ class CreateEventFragment : Fragment() {
 
     }
 
-    fun createEvent(eventHost: String, eventName: String, eventLocation: String, details: String, bring: String,
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+    //    super.onActivityResult(requestCode, resultCode, data)
+
+        if (requestCode == PLACE_PICKER_REQUEST && resultCode == RESULT_OK) {
+                val place = PlacePicker.getPlace(context, data!!)
+                val stBuilder = StringBuilder()
+                val placename = String.format("%s", place.getName())
+                val latitude = place.getLatLng().latitude
+                val longitude = place.getLatLng().longitude
+                val address = String.format("%s", place.getAddress())
+                stBuilder.append(address)
+                var addressTxt = stBuilder.toString()
+                addressTxt = address.substringBefore("NSW")
+                textViewLocation.text = addressTxt
+        }
+
+    }
+
+    fun createEvent(eventHost: String, eventName: String, eventLocation: String, details: String,
                     date: String, time: String, attend: String) {
 
         var newEvent = UUID.randomUUID().toString()
@@ -188,7 +258,6 @@ class CreateEventFragment : Fragment() {
         eventObject.put("eventName", eventName)
         eventObject.put("eventLocation", eventLocation)
         eventObject.put("eventDetails", details)
-        eventObject.put("eventBring", bring)
         eventObject.put("eventDate", date)
         eventObject.put("eventTime", time)
  //       eventObject.put("attending", attend)
@@ -221,6 +290,33 @@ class CreateEventFragment : Fragment() {
         fun onFragmentInteraction(uri: Uri)
     }
 
+    private fun getPhotos() {
+        Toast.makeText(context, "Hi Photo", Toast.LENGTH_SHORT).show()
+        val placeId = "ChIJa147K9HX3IAR-lwiGIQv9i4"
+        val photoMetadataResponse = mGeoDataClient!!.getPlacePhotos(placeId)
+        photoMetadataResponse?.addOnCompleteListener(object : OnCompleteListener<PlacePhotoMetadataResponse> {
+            override fun onComplete(@NonNull task: Task<PlacePhotoMetadataResponse>) {
+                // Get the list of photos.
+                val photos = task.getResult()
+                // Get the PlacePhotoMetadataBuffer (metadata for all of the photos).
+                val photoMetadataBuffer = photos.getPhotoMetadata()
+                // Get the first photo in the list.
+                val photoMetadata = photoMetadataBuffer.get(0)
+                // Get the attribution text.
+                val attribution = photoMetadata.getAttributions()
+                // Get a full-size bitmap for the photo.
+                val photoResponse = mGeoDataClient!!.getPhoto(photoMetadata)
+                photoResponse?.addOnCompleteListener(object : OnCompleteListener<PlacePhotoResponse> {
+                    override fun onComplete(@NonNull task: Task<PlacePhotoResponse>) {
+                        val photo = task.getResult()
+                        val bitmap = photo.getBitmap()
+                        imageView.setImageBitmap(bitmap)
+                    }
+                })
+            }
+        })
+    }
+
     companion object {
         /**
          * Use this factory method to create a new instance of
@@ -239,5 +335,8 @@ class CreateEventFragment : Fragment() {
                         putString(ARG_PARAM2, param2)
                     }
                 }
+        fun create(): MainActivity = MainActivity()
+
+
     }
 }
