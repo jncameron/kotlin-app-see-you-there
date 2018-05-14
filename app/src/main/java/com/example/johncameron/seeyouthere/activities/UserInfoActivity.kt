@@ -31,11 +31,14 @@ class UserInfoActivity : AppCompatActivity() {
         var oldDisplayName = intent.extras.get("display_name")
         displayNameUpdateEt.setHint(oldDisplayName.toString())
 
-        var oldStatus = intent.extras.get("status")
-        statusUpdateEt.setHint(oldStatus.toString())
+        var oldlanguage = intent.extras.get("language")
+        languageUpdateEt.setHint(oldlanguage.toString())
 
-        var oldCountry = intent.extras.get("country")
-        countryUpdateEt.setHint(oldCountry.toString())
+        var oldinterests = intent.extras.get("interests")
+        interestsUpdateEt.setHint(oldinterests.toString())
+
+        var oldEducation = intent.extras.get("education")
+        educationUpdateEt.setHint(oldEducation.toString())
 
         var oldEap = intent.extras.get("eap")
         eapUpdateEt.setHint(oldEap.toString())
@@ -71,7 +74,7 @@ class UserInfoActivity : AppCompatActivity() {
 
         }
 
-        statusUpdateBtn.setOnClickListener {
+        languageUpdateBtn.setOnClickListener {
 
 
             mCurrentUser = FirebaseAuth.getInstance().currentUser
@@ -81,18 +84,18 @@ class UserInfoActivity : AppCompatActivity() {
                     .child("Users")
                     .child(userId)
 
-            var status = statusUpdateEt.text.toString().trim()
+            var language = languageUpdateEt.text.toString().trim()
 
-            mDatabase!!.child("status")
-                    .setValue(status).addOnCompleteListener { task: Task<Void> ->
+            mDatabase!!.child("language")
+                    .setValue(language).addOnCompleteListener { task: Task<Void> ->
                         if (task.isSuccessful) {
-                            Toast.makeText(this, "Status Updated Successfully!", Toast.LENGTH_LONG)
+                            Toast.makeText(this, "Languages Updated Successfully!", Toast.LENGTH_LONG)
                                     .show()
                             startActivity(Intent(this, SettingsActivity::class.java))
 
                         } else {
 
-                            Toast.makeText(this, "Status Not Updated!", Toast.LENGTH_LONG)
+                            Toast.makeText(this, "Languages Not Updated!", Toast.LENGTH_LONG)
                                     .show()
 
                         }
@@ -109,7 +112,7 @@ class UserInfoActivity : AppCompatActivity() {
         options.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
 
             override fun onNothingSelected(parent: AdapterView<*>?) {
-             //   result.text = "Please select a level"
+                //   result.text = "Please select a level"
             }
 
             override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
@@ -145,39 +148,68 @@ class UserInfoActivity : AppCompatActivity() {
 
                         }
                     }
+        }
 
 
 
-            countryUpdateBtn.setOnClickListener {
+        interestsUpdateBtn.setOnClickListener {
 
 
-                mCurrentUser = FirebaseAuth.getInstance().currentUser
-                var userId = mCurrentUser!!.uid
+            mCurrentUser = FirebaseAuth.getInstance().currentUser
+            var userId = mCurrentUser!!.uid
 
-                mDatabase = FirebaseDatabase.getInstance().reference
-                        .child("Users")
-                        .child(userId)
+            mDatabase = FirebaseDatabase.getInstance().reference
+                    .child("Users")
+                    .child(userId)
 
-                var country = countryUpdateEt.text.toString().trim()
+            var interests = interestsUpdateEt.text.toString().trim()
 
-                mDatabase!!.child("country")
-                        .setValue(country).addOnCompleteListener { task: Task<Void> ->
-                            if (task.isSuccessful) {
-                                Toast.makeText(this, "Country Updated Successfully!", Toast.LENGTH_LONG)
-                                        .show()
-                                startActivity(Intent(this, SettingsActivity::class.java))
+            mDatabase!!.child("interested_in")
+                    .setValue(interests).addOnCompleteListener { task: Task<Void> ->
+                        if (task.isSuccessful) {
+                            Toast.makeText(this, "Interests Updated Successfully!", Toast.LENGTH_LONG)
+                                    .show()
+                            startActivity(Intent(this, SettingsActivity::class.java))
 
-                            } else {
+                        } else {
 
-                                Toast.makeText(this, "Country Not Updated!", Toast.LENGTH_LONG)
-                                        .show()
+                            Toast.makeText(this, "Interests Not Updated!", Toast.LENGTH_LONG)
+                                    .show()
 
-                            }
                         }
-
-            }
+                    }
 
         }
+
+        educationUpdateBtn.setOnClickListener {
+
+
+            mCurrentUser = FirebaseAuth.getInstance().currentUser
+            var userId = mCurrentUser!!.uid
+
+            mDatabase = FirebaseDatabase.getInstance().reference
+                    .child("Users")
+                    .child(userId)
+
+            var education = interestsUpdateEt.text.toString().trim()
+
+            mDatabase!!.child("studying")
+                    .setValue(education).addOnCompleteListener { task: Task<Void> ->
+                        if (task.isSuccessful) {
+                            Toast.makeText(this, "Education Updated Successfully!", Toast.LENGTH_LONG)
+                                    .show()
+                            startActivity(Intent(this, SettingsActivity::class.java))
+
+                        } else {
+
+                            Toast.makeText(this, "Education Not Updated!", Toast.LENGTH_LONG)
+                                    .show()
+
+                        }
+                    }
+
+        }
+
     }
 }
 

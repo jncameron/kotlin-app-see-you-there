@@ -73,15 +73,19 @@ class SettingsActivity : AppCompatActivity() {
             override fun onDataChange(dataSnapshot: DataSnapshot?) {
                 var displayName = dataSnapshot!!.child("display_name").value
                 var image = dataSnapshot!!.child("image").value.toString()
-                var userStatus = dataSnapshot!!.child("status").value
+                var userEducation = dataSnapshot!!.child("studying").value
                 var userEap = dataSnapshot!!.child("eap").value
-                var userCountry = dataSnapshot!!.child("country").value
+                var userLanguage = dataSnapshot!!.child("language").value
+                var userAge = dataSnapshot!!.child("age").value
+                var userInterests = dataSnapshot!!.child("interested_in").value
                 var thumbnail = dataSnapshot!!.child("thumb_image").value
 
                 settingsDisplayName.text = displayName.toString()
-                settingsStatus.text = userStatus.toString()
+                settingsEducation.text = userEducation.toString()
                 settingsEap.text = userEap.toString()
-                settingsCountry.text = userCountry.toString()
+                settingsLanguage.text = userLanguage.toString()
+                settingsAge.text = userAge.toString()
+                settingsInterests.text = userInterests.toString()
 
                 if (!image!!.equals("default")) {
                     Picasso.with(applicationContext)
@@ -103,9 +107,10 @@ class SettingsActivity : AppCompatActivity() {
 
             var intent = Intent(this, UserInfoActivity::class.java)
             intent.putExtra("display_name", settingsDisplayName.text.toString().trim())
-            intent.putExtra("status", settingsStatus.text.toString().trim())
+            intent.putExtra("education", settingsEducation.text.toString().trim())
             intent.putExtra("eap", settingsEap.text.toString().trim())
-            intent.putExtra("country", settingsCountry.text.toString().trim())
+            intent.putExtra("language", settingsLanguage.text.toString().trim())
+            intent.putExtra("interests", settingsInterests.text.toString().trim())
             startActivity(intent)
 
 
