@@ -97,7 +97,7 @@ class EventActivity : AppCompatActivity(), OnMapReadyCallback {
                 val sydney = LatLng(lat, long)
                 mMap.addMarker(MarkerOptions().position(sydney).title(eventLocation))
                 //  mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney))
-                mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(sydney, 13.0f))
+                mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(sydney, 15.0f))
 
 
                 var attendingUsers: DataSnapshot = dataSnapshot!!.child("Events").child(eventId).child("attending")
@@ -108,6 +108,58 @@ class EventActivity : AppCompatActivity(), OnMapReadyCallback {
                     attendingUsersList?.add(user.value.toString())
 
                 }
+
+                //find users with same language, EAP Level, education, intestest
+                userId1 = attendingUsersList[0]
+                var eapLevel = dataSnapshot!!.child("Users").child(userId1).child("eap")?.value.toString()
+
+                var sameEap = 0
+                for (user in attendingUsersList) {
+                    if (dataSnapshot!!.child("Users").child(user).child("eap").value.toString() == eapLevel) {
+                        sameEap += 1
+                    }
+                }
+
+                EapLevelAttendingNumber.text = sameEap.toString()
+                eapLevel = eapLevel + " Students"
+                EapLevelAttendingText.text = eapLevel
+
+
+
+
+                var language = dataSnapshot!!.child("Users").child(userId1).child("language")?.value.toString()
+                var sameLanguage = 0
+                for (user in attendingUsersList) {
+                    if (dataSnapshot!!.child("Users").child(user).child("language").value.toString() == language) {
+                        sameLanguage += 1
+                    }
+                }
+                languageAttendingNumber.text = sameLanguage.toString()
+
+                language = language + " Speakers"
+                languageAttendingText.text = language
+
+                var education = dataSnapshot!!.child("Users").child(userId1).child("studying")?.value.toString()
+                var sameEducation = 0
+                for (user in attendingUsersList) {
+                    if (dataSnapshot!!.child("Users").child(user).child("studying").value.toString() == education) {
+                        sameEducation += 1
+                    }
+                }
+                EducationAttendingNumber.text = sameEducation.toString()
+                education = education + " Students"
+                EducationAttendingText.text = education
+
+                var interests = dataSnapshot!!.child("Users").child(userId1).child("interested_in")?.value.toString()
+                var sameInterests = 0
+                for (user in attendingUsersList) {
+                    if (dataSnapshot!!.child("Users").child(user).child("interested_in").value.toString() == interests) {
+                        sameInterests += 1
+                    }
+                }
+                InterestsAttendingNumber.text = sameInterests.toString()
+                interests = "Love \n$interests!"
+                InterestsAttendingText.text = interests
 
 
 
@@ -239,7 +291,6 @@ class EventActivity : AppCompatActivity(), OnMapReadyCallback {
 
 
                 singleEventTitle.text = eventName
-                singleEventHostedBy.text = eventHost
                 singleEventLocation.text = eventLocation
 
 
@@ -248,6 +299,7 @@ class EventActivity : AppCompatActivity(), OnMapReadyCallback {
 
                 if (!attendingUsersList.contains(mCurrentUser!!.uid)) {
                     iWillAttend.visibility = View.VISIBLE
+                    isAttending.visibility = View.INVISIBLE
 
                     iWillAttend.setOnClickListener {
                         mDatabase!!.child("Events").child(eventId).child("attending").push().setValue(mCurrentUser!!.uid)
@@ -255,6 +307,7 @@ class EventActivity : AppCompatActivity(), OnMapReadyCallback {
 
                 } else {
                     iWillAttend.visibility = View.INVISIBLE
+                    isAttending.visibility = View.VISIBLE
                 }
 
             }

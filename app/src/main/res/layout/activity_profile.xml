@@ -12,120 +12,218 @@
         android:id="@+id/cardView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:cardBackgroundColor="@color/colorPrimary"
+        android:background="@drawable/textview_border"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
 
-        <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-            xmlns:app="http://schemas.android.com/apk/res-auto"
-            xmlns:tools="http://schemas.android.com/tools"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="@drawable/bg2"
-            tools:context="com.example.johncameron.seeyouthere.activities.ProfileActivity">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/textview_border"
+                android:orientation="vertical">
+
+                <android.support.constraint.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/textview_border">
+
+                    <ImageView
+                        android:id="@+id/profilePicture"
+                        android:layout_width="250dp"
+                        android:layout_height="250dp"
+                        android:layout_weight="1"
+                        android:contentDescription="Profile Picture"
+                        android:cropToPadding="false"
+                        android:src="@drawable/profile_img"
+                        android:paddingTop="4dp"
+                        android:paddingBottom="4dp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                </android.support.constraint.ConstraintLayout>
 
 
-            <ImageView
-                android:id="@+id/profilePicture"
-                android:layout_width="200dp"
-                android:layout_height="200dp"
-                android:layout_marginTop="8dp"
-                android:contentDescription="Profile Picture"
-                android:paddingTop="10dp"
-                android:src="@drawable/profile_img"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/textview_border"
+                    android:orientation="vertical"
+                    android:paddingLeft="40dp"
+                    android:paddingTop="10dp">
 
-            <TextView
-                android:id="@+id/profileName"
-                android:layout_width="200dp"
-                android:layout_height="30dp"
-                android:layout_marginEnd="8dp"
-                android:layout_marginStart="8dp"
-                android:text="Display Name"
-                android:textAlignment="textStart"
-                android:textColor="@android:color/white"
-                android:textSize="18sp"
-                android:textStyle="bold"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/profilePicture" />
+                    <TextView
+                        android:id="@+id/profileName"
+                        android:layout_width="wrap_content"
+                        android:layout_height="30dp"
+                        android:layout_marginEnd="8dp"
+                        android:layout_marginStart="8dp"
+                        android:text="Display Name"
 
-            <TextView
-                android:id="@+id/profileCountry"
-                android:layout_width="200dp"
-                android:layout_height="30dp"
-                android:layout_marginEnd="8dp"
-                android:layout_marginStart="8dp"
-                android:text="Australia"
-                android:textAlignment="textStart"
-                android:textColor="@android:color/white"
-                android:textSize="14sp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/profileName" />
+                        android:textAlignment="textStart"
+                        android:textColor="@color/colorPrimaryDark"
+                        android:textSize="18sp"
+                        android:textStyle="bold" />
 
-            <TextView
-                android:id="@+id/profileEAP"
-                android:layout_width="200dp"
-                android:layout_height="30dp"
-                android:layout_marginEnd="8dp"
-                android:layout_marginStart="8dp"
-                android:text="EAP"
-                android:textAlignment="textStart"
-                android:textColor="@android:color/white"
-                android:textSize="14sp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/profileCountry" />
+                    <TextView
+                        android:id="@+id/profileAge"
+                        android:layout_width="match_parent"
+                        android:layout_height="30dp"
+                        android:layout_marginEnd="8dp"
+                        android:layout_marginStart="8dp"
+                        android:text="52"
+                        android:textAlignment="textStart"
+                        android:textColor="@color/colorPrimaryDark"
+                        android:textSize="14sp"
+                        android:textStyle="bold" />
+                </LinearLayout>
 
-            <TextView
-                android:id="@+id/profileStatus"
-                android:layout_width="200dp"
-                android:layout_height="30dp"
-                android:layout_marginEnd="8dp"
-                android:layout_marginStart="8dp"
-                android:text="my status"
-                android:textAlignment="textStart"
-                android:textColor="@android:color/white"
-                android:textSize="14sp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/profileEAP" />
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/textview_border"
+                    android:orientation="horizontal"
+                    android:paddingTop="15dp"
+                    android:paddingBottom="15dp"
+                    android:paddingLeft="50dp">
 
 
-        </android.support.constraint.ConstraintLayout>
+                    <ImageView
+                        android:id="@+id/imageView3"
+                        android:layout_width="40dp"
+                        android:layout_height="35dp"
+                        android:layout_weight="1"
+                        android:adjustViewBounds="false"
+                        android:cropToPadding="false"
+                        android:scaleType="fitStart"
+                        app:srcCompat="@drawable/ic_language_black_24dp" />
+
+                    <TextView
+                        android:id="@+id/profileLanguage"
+                        android:layout_width="270dp"
+                        android:layout_height="30dp"
+                        android:layout_marginEnd="8dp"
+                        android:layout_marginStart="8dp"
+                        android:paddingLeft="20dp"
+                        android:paddingTop="5dp"
+                        android:text="English"
+                        android:textAlignment="viewStart"
+                        android:textColor="@color/common_google_signin_btn_text_dark_focused"
+                        android:textSize="18sp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/textview_border"
+                    android:orientation="horizontal"
+                    android:paddingTop="15dp"
+                    android:paddingBottom="15dp"
+                    android:paddingLeft="50dp">
+
+                    <ImageView
+                        android:id="@+id/imageView4"
+                        android:layout_width="40dp"
+                        android:layout_height="35dp"
+                        android:layout_weight="1"
+                        android:adjustViewBounds="false"
+                        android:cropToPadding="false"
+                        android:scaleType="fitStart"
+                        app:srcCompat="@drawable/ic_school_black_24dp" />
+
+                    <TextView
+                        android:id="@+id/profileEAP"
+                        android:layout_width="270dp"
+                        android:layout_height="30dp"
+                        android:layout_marginEnd="8dp"
+                        android:layout_marginStart="8dp"
+                        android:paddingLeft="20dp"
+                        android:paddingTop="5dp"
+                        android:text="EAP"
+                        android:textAlignment="textStart"
+                        android:textColor="@color/common_google_signin_btn_text_dark_focused"
+                        android:textSize="18sp" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/textview_border"
+                    android:orientation="horizontal"
+                    android:paddingTop="15dp"
+                    android:paddingBottom="15dp"
+                    android:paddingLeft="50dp">
+
+                    <ImageView
+                        android:id="@+id/imageView5"
+                        android:layout_width="40dp"
+                        android:layout_height="35dp"
+                        android:layout_weight="1"
+                        android:adjustViewBounds="false"
+                        android:cropToPadding="false"
+                        android:scaleType="fitStart"
+                        app:srcCompat="@drawable/ic_school_black_24dp" />
+
+                    <TextView
+                        android:id="@+id/profileStudying"
+                        android:layout_width="270dp"
+                        android:layout_height="30dp"
+                        android:layout_marginEnd="8dp"
+                        android:layout_marginStart="8dp"
+                        android:text="Fine Arts"
+                        android:paddingLeft="20dp"
+                        android:paddingTop="5dp"
+                        android:textAlignment="textStart"
+                        android:textColor="@color/common_google_signin_btn_text_dark_focused"
+                        android:textSize="18sp" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/textview_border"
+                    android:orientation="horizontal"
+                    android:paddingTop="15dp"
+                    android:paddingBottom="15dp"
+                    android:paddingLeft="50dp">
+
+                    <ImageView
+                        android:id="@+id/imageView6"
+                        android:layout_width="40dp"
+                        android:layout_height="35dp"
+                        android:layout_weight="1"
+                        android:adjustViewBounds="false"
+                        android:cropToPadding="false"
+                        android:scaleType="fitStart"
+                        app:srcCompat="@drawable/ic_directions_bike_black_24dp" />
+
+                    <TextView
+                        android:id="@+id/profileInterests"
+                        android:layout_width="270dp"
+                        android:layout_height="30dp"
+                        android:layout_marginEnd="8dp"
+                        android:layout_marginStart="8dp"
+                        android:text="Cricket"
+                        android:paddingLeft="20dp"
+                        android:paddingTop="5dp"
+                        android:textAlignment="textStart"
+                        android:textColor="@color/common_google_signin_btn_text_dark_focused"
+                        android:textSize="18sp"/>
+                </LinearLayout>
+
+
+            </LinearLayout>
+
+
 
 
     </android.support.v7.widget.CardView>
 
-    <android.support.v7.widget.CardView
-        android:id="@+id/cardView2"
-        android:layout_width="200dp"
-        android:layout_height="wrap_content"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/cardView">
-
-    </android.support.v7.widget.CardView>
-
-
-        <Button
-            android:id="@+id/profileSendMessage"
-            android:layout_width="222dp"
-            android:layout_height="45dp"
-            android:layout_marginTop="32dp"
-            android:background="@drawable/bt_shape"
-            android:stateListAnimator="@drawable/state_list_animator_z"
-            android:text="Send Message"
-            android:textColor="@color/common_google_signin_btn_text_dark_focused"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/cardView2" />
 
 
 </android.support.constraint.ConstraintLayout>

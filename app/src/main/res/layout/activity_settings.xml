@@ -8,6 +8,8 @@
     tools:context="com.example.johncameron.seeyouthere.activities.SettingsActivity">
 
 
+
+
     <ImageView
         android:id="@+id/settingsProfileID"
         android:layout_width="200dp"

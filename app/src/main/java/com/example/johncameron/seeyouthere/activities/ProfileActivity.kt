@@ -43,15 +43,19 @@ class ProfileActivity : AppCompatActivity() {
             override fun onDataChange(dataSnapshot: DataSnapshot?) {
 
                 var displayName = dataSnapshot!!.child("display_name").value.toString()
-                var status = dataSnapshot!!.child("status").value.toString()
+                var language = dataSnapshot!!.child("language").value.toString()
                 var image = dataSnapshot!!.child("image").value.toString()
                 var eap = dataSnapshot!!.child("eap").value.toString()
-                var country = dataSnapshot!!.child("country").value.toString()
+                var studying = dataSnapshot!!.child("studying").value.toString()
+                var interests = dataSnapshot!!.child("interested_in").value.toString()
+                var age = dataSnapshot!!.child("age").value.toString()
 
                 profileName.text = displayName
+                profileAge.text = age
                 profileEAP.text = eap
-                profileCountry.text = country
-                profileStatus.text = status
+                profileLanguage.text = language
+                profileStudying.text = studying
+                profileInterests.text = interests
 
 
                 Picasso.with(this@ProfileActivity)

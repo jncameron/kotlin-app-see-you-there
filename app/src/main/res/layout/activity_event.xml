@@ -10,15 +10,8 @@
     <android.support.v7.widget.CardView
 
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="8dp"
-        android:layout_marginBottom="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        app:cardBackgroundColor="@color/lightPurple"
-        app:cardCornerRadius="13dp"
-        app:cardElevation="4dp"
+        android:layout_height="match_parent"
+        app:cardBackgroundColor="@color/lightBg"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -26,51 +19,27 @@
 
         <android.support.constraint.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="match_parent">
 
-            <TextView
-                android:id="@+id/singleEventTitle"
+            <ImageView
+                android:id="@+id/eventImage"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="8dp"
-                android:layout_marginStart="8dp"
-                android:text="Event Name"
-                android:textColor="@color/colorPrimaryDark"
-                android:textSize="18sp"
-                android:textStyle="bold"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent" />
-
-
-            <TextView
-                android:id="@+id/singleEventLocation"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="8dp"
-                android:layout_marginStart="8dp"
-                android:layout_marginTop="8dp"
-                android:background="@drawable/selector_bg_edit_2"
-                android:paddingBottom="10dp"
-                android:text="location"
-                android:textColor="#000"
-                android:textSize="18sp"
+                android:layout_height="199dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/singleEventTitle" />
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/echopoint" />
 
 
             <android.support.v7.widget.CardView
                 android:id="@+id/hostCard"
-                android:layout_width="0dp"
-                android:layout_height="0dp"
-                android:layout_marginBottom="9dp"
-                android:layout_marginEnd="8dp"
-                android:layout_marginStart="8dp"
-                android:layout_marginTop="8dp"
-                app:layout_constraintBottom_toTopOf="@+id/guideline8"
-                app:layout_constraintEnd_toStartOf="@+id/guideline2"
+                android:layout_width="match_parent"
+                android:layout_height="70dp"
+                android:layout_marginTop="1dp"
+                android:background="@drawable/textview_border"
+                android:elevation="4dp"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/guideline6">
+                app:layout_constraintTop_toBottomOf="@+id/eventImage">
 
                 <android.support.constraint.ConstraintLayout
                     android:layout_width="match_parent"
@@ -78,52 +47,84 @@
 
                     <de.hdodenhof.circleimageview.CircleImageView
                         android:id="@+id/eventAttendingUserProfile1"
-                        android:layout_width="70dp"
-                        android:layout_height="70dp"
-                        android:layout_marginEnd="8dp"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:layout_marginBottom="8dp"
                         android:layout_marginStart="8dp"
                         android:layout_marginTop="8dp"
                         android:src="@drawable/profile_img"
                         app:civ_border_color="@color/colorPrimaryDark"
                         app:civ_border_width="2dp"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/host" />
-
-
-                    <TextView
-                        android:id="@+id/host"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginEnd="8dp"
-                        android:layout_marginStart="8dp"
-                        android:layout_marginTop="8dp"
-                        android:gravity="center_vertical|center_horizontal|center"
-                        android:text="Host"
-                        android:textAlignment="center"
-                        android:textColor="@color/common_google_signin_btn_text_dark_focused"
-                        android:textSize="14sp"
-                        android:textStyle="bold"
-                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
 
                     <TextView
-                        android:id="@+id/singleEventHostedBy"
+                        android:id="@+id/singleEventTitle"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginEnd="8dp"
                         android:layout_marginStart="8dp"
-                        android:layout_marginTop="8dp"
-                        android:gravity="center_vertical|center_horizontal|center"
-                        android:text="Host"
-                        android:textAlignment="center"
-                        android:textColor="@color/common_google_signin_btn_text_dark_focused"
+                        android:layout_marginTop="12dp"
+                        android:text="Event Name"
+                        android:textColor="@color/colorPrimaryDark"
                         android:textSize="14sp"
-                        android:textStyle="bold"
+                        app:layout_constraintStart_toEndOf="@+id/eventAttendingUserProfile1"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:id="@+id/singleEventLocation"
+                        android:layout_width="wrap_content"
+                        android:layout_height="30dp"
+                        android:layout_marginStart="8dp"
+                        android:layout_marginTop="2dp"
+                        android:paddingBottom="10dp"
+                        android:text="location"
+                        android:textColor="#000"
+                        android:textSize="12sp"
+                        app:layout_constraintStart_toEndOf="@+id/eventAttendingUserProfile1"
+                        app:layout_constraintTop_toBottomOf="@+id/singleEventTitle" />
+
+                    <Button
+                        android:id="@+id/iWillAttend"
+                        android:layout_width="70dp"
+                        android:layout_height="30dp"
+                        android:layout_marginEnd="8dp"
+                        android:layout_marginTop="16dp"
+                        android:background="@drawable/bt_shape"
+                        android:text="Attend"
+                        android:textSize="10sp"
                         app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/eventAttendingUserProfile1" />
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <LinearLayout
+                        android:id="@+id/isAttending"
+                        android:layout_width="70dp"
+                        android:layout_height="50dp"
+                        android:layout_marginEnd="8dp"
+                        android:layout_marginTop="8dp"
+                        android:orientation="vertical"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent">
+
+
+                        <ImageView
+                            android:id="@+id/imageView2"
+                            android:layout_width="match_parent"
+                            android:layout_height="35dp"
+                            android:layout_weight="1"
+                            app:srcCompat="@drawable/ic_sentiment_very_satisfied_black_24dp" />
+
+                        <TextView
+                            android:id="@+id/textView2"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="Attending"
+                            android:textAlignment="center"
+                            android:textSize="12sp" />
+                    </LinearLayout>
+
+
                 </android.support.constraint.ConstraintLayout>
 
 
@@ -132,112 +133,201 @@
             <android.support.v7.widget.CardView
                 android:id="@+id/attendingCard"
                 android:layout_width="0dp"
-                android:layout_height="0dp"
-                android:layout_marginBottom="8dp"
-                android:layout_marginEnd="8dp"
-                android:layout_marginStart="8dp"
-                android:layout_marginTop="8dp"
-                app:layout_constraintBottom_toTopOf="@+id/guideline8"
+                android:layout_height="100dp"
+                android:layout_marginBottom="2dp"
+                android:layout_marginTop="2dp"
+                app:layout_constraintBottom_toTopOf="@+id/mapCard"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="@+id/guideline2"
-                app:layout_constraintTop_toBottomOf="@+id/guideline6">
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/hostCard">
 
 
                 <android.support.constraint.ConstraintLayout
                     android:id="@+id/attendingCardLayout"
-                    android:layout_width="match_parent"
+                    android:layout_width="387dp"
                     android:layout_height="match_parent"
                     android:layout_marginEnd="8dp">
 
-
-                    <TextView
-                        android:id="@+id/attendingTextView"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginEnd="8dp"
-                        android:layout_marginStart="8dp"
+                    <LinearLayout
+                        android:id="@+id/languageAttending"
+                        android:layout_width="65dp"
+                        android:layout_height="80dp"
+                        android:layout_marginStart="12dp"
                         android:layout_marginTop="8dp"
-                        android:gravity="center_vertical|center_horizontal|center"
-                        android:text="Attending"
-                        android:textAlignment="center"
-                        android:textColor="@color/common_google_signin_btn_text_dark_focused"
-                        android:textSize="14sp"
-                        android:textStyle="bold"
-                        app:layout_constraintEnd_toEndOf="parent"
+                        android:orientation="vertical"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
+                        app:layout_constraintTop_toTopOf="parent">
+
+                        <TextView
+                            android:id="@+id/languageAttendingNumber"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="5"
+                            android:textAlignment="center"
+                            android:textColor="@color/colorPrimaryDark"
+                            android:textSize="36sp"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:id="@+id/languageAttendingText"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="Korean Speakers"
+                            android:textAlignment="center"
+                            android:textColor="@color/colorPrimaryDark"
+                            android:textSize="12sp" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/EapLevelAttending"
+                        android:layout_width="65dp"
+                        android:layout_height="80dp"
+                        android:layout_marginStart="12dp"
+                        android:layout_marginTop="8dp"
+                        android:orientation="vertical"
+                        app:layout_constraintStart_toEndOf="@+id/languageAttending"
+                        app:layout_constraintTop_toTopOf="parent">
+
+                        <TextView
+                            android:id="@+id/EapLevelAttendingNumber"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="11"
+                            android:textAlignment="center"
+                            android:textColor="@color/colorPrimary"
+                            android:textSize="36sp"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:id="@+id/EapLevelAttendingText"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="EAP \nLevel 6"
+                            android:textAlignment="center"
+                            android:textColor="@color/colorPrimary"
+                            android:textSize="12sp" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/EducationAttending"
+                        android:layout_width="65dp"
+                        android:layout_height="80dp"
+                        android:layout_marginStart="12dp"
+                        android:layout_marginTop="8dp"
+                        android:orientation="vertical"
+                        app:layout_constraintStart_toEndOf="@+id/EapLevelAttending"
+                        app:layout_constraintTop_toTopOf="parent">
+
+                        <TextView
+                            android:id="@+id/EducationAttendingNumber"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="7"
+                            android:textAlignment="center"
+                            android:textColor="@android:color/holo_blue_dark"
+                            android:textSize="36sp"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:id="@+id/EducationAttendingText"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="Law \nStudents"
+                            android:textAlignment="center"
+                            android:textColor="@android:color/holo_blue_dark"
+                            android:textSize="12sp" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/InterestsAttending"
+                        android:layout_width="65dp"
+                        android:layout_height="80dp"
+                        android:layout_marginStart="12dp"
+                        android:layout_marginTop="8dp"
+                        android:orientation="vertical"
+                        app:layout_constraintStart_toEndOf="@+id/EducationAttending"
+                        app:layout_constraintTop_toTopOf="parent">
+
+                        <TextView
+                            android:id="@+id/InterestsAttendingNumber"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="3"
+                            android:textAlignment="center"
+                            android:textColor="@color/colorPrimaryDark"
+                            android:textSize="36sp"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:id="@+id/InterestsAttendingText"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="Love \nHiking"
+                            android:textAlignment="center"
+                            android:textColor="@color/colorPrimaryDark"
+                            android:textSize="12sp" />
+                    </LinearLayout>
+
 
                     <de.hdodenhof.circleimageview.CircleImageView
                         android:id="@+id/eventAttendingUserProfile2"
-                        android:layout_width="45dp"
-                        android:layout_height="45dp"
-                        android:layout_marginStart="8dp"
-                        android:layout_marginTop="8dp"
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:layout_marginEnd="2dp"
+                        android:layout_marginTop="12dp"
                         android:src="@drawable/profile_img"
                         app:civ_border_color="@color/colorPrimaryDark"
                         app:civ_border_width="2dp"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/attendingTextView" />
+                        app:layout_constraintEnd_toStartOf="@+id/eventAttendingUserProfile3"
+                        app:layout_constraintTop_toTopOf="parent" />
 
                     <de.hdodenhof.circleimageview.CircleImageView
                         android:id="@+id/eventAttendingUserProfile3"
-                        android:layout_width="45dp"
-                        android:layout_height="45dp"
-                        android:layout_marginStart="2dp"
-                        android:layout_marginTop="8dp"
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:layout_marginEnd="8dp"
+                        android:layout_marginTop="12dp"
                         android:src="@drawable/profile_img"
                         app:civ_border_color="@color/colorPrimaryDark"
                         app:civ_border_width="2dp"
-                        app:layout_constraintStart_toEndOf="@+id/eventAttendingUserProfile2"
-                        app:layout_constraintTop_toBottomOf="@+id/attendingTextView" />
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
 
                     <de.hdodenhof.circleimageview.CircleImageView
                         android:id="@+id/eventAttendingUserProfile4"
-                        android:layout_width="45dp"
-                        android:layout_height="45dp"
-                        android:layout_marginStart="2dp"
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:layout_marginEnd="2dp"
                         android:layout_marginTop="8dp"
                         android:src="@drawable/profile_img"
                         app:civ_border_color="@color/colorPrimaryDark"
                         app:civ_border_width="2dp"
-                        app:layout_constraintStart_toEndOf="@+id/eventAttendingUserProfile3"
-                        app:layout_constraintTop_toBottomOf="@+id/attendingTextView" />
+                        app:layout_constraintEnd_toStartOf="@+id/andOthers"
+                        app:layout_constraintTop_toBottomOf="@+id/eventAttendingUserProfile2" />
 
                     <TextView
                         android:id="@+id/andOthers"
-                        android:layout_width="45dp"
-                        android:layout_height="45dp"
-                        android:layout_marginStart="2dp"
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:layout_marginEnd="8dp"
                         android:layout_marginTop="8dp"
                         android:background="@drawable/rounded_corner3"
                         android:gravity="center_vertical|center_horizontal|center"
                         android:text="+5"
                         android:textAlignment="center"
                         android:textColor="@color/cardview_light_background"
-                        android:textSize="18sp"
+                        android:textSize="10sp"
                         android:textStyle="bold"
-                        app:layout_constraintStart_toEndOf="@+id/eventAttendingUserProfile4"
-                        app:layout_constraintTop_toBottomOf="@+id/attendingTextView" />
-
-                    <Button
-                        android:id="@+id/iWillAttend"
-                        android:layout_width="80dp"
-                        android:layout_height="50dp"
-                        android:layout_marginEnd="8dp"
-                        android:layout_marginStart="8dp"
-                        android:layout_marginTop="16dp"
-                        android:background="@drawable/bt_shape"
-                        android:text="See You There"
                         app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="@+id/guideline9" />
-
-                    <android.support.constraint.Guideline
-                        android:id="@+id/guideline9"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal"
-                        app:layout_constraintGuide_percent="0.5" />
+                        app:layout_constraintTop_toBottomOf="@+id/eventAttendingUserProfile3" />
 
                 </android.support.constraint.ConstraintLayout>
 
@@ -257,13 +347,11 @@
                 android:layout_width="0dp"
                 android:layout_height="0dp"
                 android:layout_marginBottom="8dp"
-                android:layout_marginEnd="8dp"
-                android:layout_marginStart="8dp"
-                android:layout_marginTop="8dp"
+                android:layout_marginTop="2dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/guideline8">
+                app:layout_constraintTop_toBottomOf="@+id/attendingCard">
 
 
                 <fragment
@@ -271,9 +359,8 @@
                     android:name="com.google.android.gms.maps.SupportMapFragment"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    tools:context=".activities.EventActivity"/>
+                    tools:context=".activities.EventActivity" />
             </android.support.v7.widget.CardView>
-
 
 
             <com.google.android.gms.maps.MapView
@@ -282,8 +369,7 @@
                 android:layout_height="0dp"
                 android:layout_marginBottom="8dp"
                 android:layout_marginEnd="8dp"
-                android:layout_marginStart="8dp"
-/>
+                android:layout_marginStart="8dp" />
 
             <android.support.constraint.Guideline
                 android:id="@+id/guideline2"
@@ -331,12 +417,5 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         app:layout_constraintGuide_begin="155dp" />
-
-    <android.support.constraint.Guideline
-        android:id="@+id/guideline7"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layout_constraintGuide_begin="284dp" />
 
 </android.support.constraint.ConstraintLayout>
