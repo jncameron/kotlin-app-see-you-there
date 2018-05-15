@@ -1,16 +1,19 @@
 package com.example.johncameron.seeyouthere.fragments
 
+import android.app.Activity
 import android.app.Activity.RESULT_OK
 import android.app.DatePickerDialog
 import android.app.TimePickerDialog
 import android.content.Context
 import android.content.Intent
+import android.graphics.Bitmap
 import android.net.Uri
 import android.os.Bundle
-import android.support.annotation.NonNull
 import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentActivity
 import android.text.TextUtils
+
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -19,22 +22,29 @@ import android.widget.TextView
 import android.widget.Toast
 import com.example.johncameron.seeyouthere.R
 import com.example.johncameron.seeyouthere.activities.Main2Activity
+import com.example.johncameron.seeyouthere.activities.MainActivity
+import com.google.android.gms.common.GooglePlayServicesNotAvailableException
+import com.google.android.gms.common.GooglePlayServicesRepairableException
 import com.google.android.gms.common.api.GoogleApiClient
+import com.google.android.gms.location.places.GeoDataClient
+import com.google.android.gms.location.places.Places
 import com.google.android.gms.location.places.ui.PlacePicker
+import com.google.android.gms.tasks.Task
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.database.*
+import com.google.firebase.storage.FirebaseStorage
+import com.google.firebase.storage.StorageReference
+import com.google.firebase.storage.UploadTask
+import com.squareup.picasso.Picasso
+import com.theartofdev.edmodo.cropper.CropImage
+import io.reactivex.annotations.NonNull
 import kotlinx.android.synthetic.main.fragment_create_event.*
-import org.w3c.dom.Text
+import java.io.ByteArrayOutputStream
+import java.io.File
 import java.text.SimpleDateFormat
 import java.util.*
 import kotlin.collections.HashMap
-import com.google.android.gms.common.GooglePlayServicesNotAvailableException
-import com.google.android.gms.common.GooglePlayServicesRepairableException
-import com.example.johncameron.seeyouthere.activities.MainActivity
-import com.google.android.gms.location.places.*
-import com.google.android.gms.tasks.OnCompleteListener
-import com.google.android.gms.tasks.Task
 
 
 // TODO: Rename parameter arguments, choose names that match
@@ -57,8 +67,12 @@ class CreateEventFragment : Fragment() {
     var mDatabase: DatabaseReference? = null
     var mCurrentUser: FirebaseUser? = null
     var mGoogleApiClient: GoogleApiClient? = null
+    var mStorageRef: StorageReference? = null
     var mGeoDataClient: GeoDataClient? = null
     val PLACE_PICKER_REQUEST = 1
+    var GALLERY_ID = 2
+    var imageId = ""
+    var downloadUrl = ""
 
 
 
@@ -76,6 +90,8 @@ class CreateEventFragment : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         mAuth = FirebaseAuth.getInstance()
+        mStorageRef = FirebaseStorage.getInstance().reference
+
         arguments?.let {
             param1 = it.getString(ARG_PARAM1)
             param2 = it.getString(ARG_PARAM2)
@@ -116,7 +132,7 @@ class CreateEventFragment : Fragment() {
             cal.set(Calendar.HOUR_OF_DAY, hour)
             cal.set(Calendar.MINUTE, minute)
 
-            val timeFormatter = SimpleDateFormat("HH:mm").format(cal.time)
+            val timeFormatter = SimpleDateFormat("h:mm a").format(cal.time)
             val sb = StringBuilder()
 
             sb.append((timeFormatter))
@@ -124,7 +140,7 @@ class CreateEventFragment : Fragment() {
         }
 
         textViewTime.setOnClickListener {
-            TimePickerDialog(context, timeSetListener, cal.get(Calendar.HOUR_OF_DAY), cal.get(Calendar.MINUTE), true).show()
+            TimePickerDialog(context, timeSetListener, cal.get(Calendar.HOUR_OF_DAY), cal.get(Calendar.MINUTE), false).show()
         }
 
 
@@ -151,7 +167,10 @@ class CreateEventFragment : Fragment() {
 
         textViewPhoto = newEventPhoto
         textViewPhoto.setOnClickListener {
-            getPhotos()
+            var galleryIntent = Intent()
+            galleryIntent.type = "image/*"
+            galleryIntent.action = Intent.ACTION_GET_CONTENT
+            startActivityForResult(Intent.createChooser(galleryIntent, "SELECT_IMAGE"), GALLERY_ID)
         }
 
 
@@ -163,6 +182,8 @@ class CreateEventFragment : Fragment() {
         mDatabase = FirebaseDatabase.getInstance().reference
                 .child("Users")
                 .child(userId)
+
+
 
         mDatabase!!.addValueEventListener(object : ValueEventListener {
 
@@ -180,7 +201,7 @@ class CreateEventFragment : Fragment() {
             cal.set(Calendar.MONTH, monthOfYear)
             cal.set(Calendar.DAY_OF_MONTH, dayOfMonth)
 
-            val dateFormatter = SimpleDateFormat("dd.MM.yyyy").format(cal.time)
+            val dateFormatter = SimpleDateFormat("E MMM d").format(cal.time)
             val sb = StringBuilder()
             sb.append(dateFormatter)
 
@@ -207,11 +228,12 @@ class CreateEventFragment : Fragment() {
             var date = newEventDate.text.toString().trim()
             var time = newEventTime.text.toString().trim()
             var attend = userId.toString()
+            var image = downloadUrl
 
             if (!TextUtils.isEmpty(eventName) && !TextUtils.isEmpty(eventLocation)
                     && !TextUtils.isEmpty(details) && !TextUtils.isEmpty(date)
                     && !TextUtils.isEmpty(time)) {
-                createEvent(eventHost, eventName, eventLocation, details, date, time, attend)
+                createEvent(eventHost, eventName, eventLocation, details, date, time, attend, image)
 
             } else {
                 Toast.makeText(context, "Please fill out the fields", Toast.LENGTH_LONG)
@@ -241,10 +263,96 @@ class CreateEventFragment : Fragment() {
                 textViewLocation.text = addressTxt
         }
 
+        if (requestCode == GALLERY_ID
+                && resultCode == Activity.RESULT_OK) {
+
+            var eventImage: Uri = data!!.data
+
+            CropImage.activity(eventImage)
+                    .setAspectRatio(2, 1)
+                    .start(context!!, this)
+
+        }
+
+        if (requestCode === CropImage.CROP_IMAGE_ACTIVITY_REQUEST_CODE) {
+            val result = CropImage.getActivityResult(data)
+
+            if (resultCode === Activity.RESULT_OK) {
+
+                val resultUri = result.uri
+
+                var userId = mCurrentUser!!.uid
+
+
+                //We upload images to firebase
+                var byteArray = ByteArrayOutputStream()
+//                thumbBitmap.compress(Bitmap.CompressFormat.JPEG,  100,
+//                        byteArray)
+//                var thumbByteArray: ByteArray
+//                thumbByteArray = byteArray.toByteArray()
+                imageId = UUID.randomUUID().toString()
+
+                var filePath = mStorageRef!!.child("event_images")
+                        .child( imageId + ".jpg")
+
+                //Create another directory for thumbimages ( smaller, compressed images)
+//                var thumbFilePath = mStorageRef!!.child("chat_profile_images")
+//                        .child("thumbs")
+//                        .child(userId + ".jpg")
+
+
+                filePath.putFile(resultUri)
+                        .addOnCompleteListener{
+                            task: Task<UploadTask.TaskSnapshot> ->
+                            if (task.isSuccessful) {
+
+                                //Let's get the pic url
+                                downloadUrl = task.result.downloadUrl.toString()
+
+                                //Upload Task
+//                                var uploadTask: UploadTask = thumbFilePath
+//                                        .putBytes(thumbByteArray)
+//
+//                                uploadTask.addOnCompleteListener{
+//                                    task: Task<UploadTask.TaskSnapshot> ->
+//                                   var thumbUrl = task.result.downloadUrl.toString()
+
+                                    if (task.isSuccessful) {
+
+
+                                        var updateObj = HashMap<String, Any>()
+                                        updateObj.put("eventImage", downloadUrl)
+//                                        updateObj.put("thumb_image", thumbUrl)
+
+                                        //We save the profile image
+                                        mDatabase!!.updateChildren(updateObj)
+                                                .addOnCompleteListener {
+                                                    task: Task<Void> ->
+                                                    if (task.isSuccessful) {
+                                                        newEventPhoto.text = "Event Image Saved! (Press to Change)"
+
+                                                    }else {
+                                                        Toast.makeText(context, "no good", Toast.LENGTH_SHORT).show()
+                                                    }
+                                                }
+
+                                    }else {
+
+                                    }
+                                }
+
+                            }
+                        }
+            }else if (resultCode === CropImage.CROP_IMAGE_ACTIVITY_RESULT_ERROR_CODE) {
+//                val error = result.error
+//                Log.d("Error", error.toString())
+            }
+
+
     }
 
     fun createEvent(eventHost: String, eventName: String, eventLocation: String, details: String,
-                    date: String, time: String, attend: String) {
+                    date: String, time: String, attend: String, image: String) {
 
         var newEvent = UUID.randomUUID().toString()
 
@@ -260,6 +368,7 @@ class CreateEventFragment : Fragment() {
         eventObject.put("eventDetails", details)
         eventObject.put("eventDate", date)
         eventObject.put("eventTime", time)
+        eventObject.put("eventImage", image)
  //       eventObject.put("attending", attend)
 
 
@@ -290,32 +399,32 @@ class CreateEventFragment : Fragment() {
         fun onFragmentInteraction(uri: Uri)
     }
 
-    private fun getPhotos() {
-        Toast.makeText(context, "Hi Photo", Toast.LENGTH_SHORT).show()
-        val placeId = "ChIJa147K9HX3IAR-lwiGIQv9i4"
-        val photoMetadataResponse = mGeoDataClient!!.getPlacePhotos(placeId)
-        photoMetadataResponse?.addOnCompleteListener(object : OnCompleteListener<PlacePhotoMetadataResponse> {
-            override fun onComplete(@NonNull task: Task<PlacePhotoMetadataResponse>) {
-                // Get the list of photos.
-                val photos = task.getResult()
-                // Get the PlacePhotoMetadataBuffer (metadata for all of the photos).
-                val photoMetadataBuffer = photos.getPhotoMetadata()
-                // Get the first photo in the list.
-                val photoMetadata = photoMetadataBuffer.get(0)
-                // Get the attribution text.
-                val attribution = photoMetadata.getAttributions()
-                // Get a full-size bitmap for the photo.
-                val photoResponse = mGeoDataClient!!.getPhoto(photoMetadata)
-                photoResponse?.addOnCompleteListener(object : OnCompleteListener<PlacePhotoResponse> {
-                    override fun onComplete(@NonNull task: Task<PlacePhotoResponse>) {
-                        val photo = task.getResult()
-                        val bitmap = photo.getBitmap()
-                        imageView.setImageBitmap(bitmap)
-                    }
-                })
-            }
-        })
-    }
+//    private fun getPhotos() {
+//        Toast.makeText(context, "Hi Photo", Toast.LENGTH_SHORT).show()
+//        val placeId = "ChIJa147K9HX3IAR-lwiGIQv9i4"
+//        val photoMetadataResponse = mGeoDataClient!!.getPlacePhotos(placeId)
+//        photoMetadataResponse?.addOnCompleteListener(object : OnCompleteListener<PlacePhotoMetadataResponse> {
+//            override fun onComplete(@NonNull task: Task<PlacePhotoMetadataResponse>) {
+//                // Get the list of photos.
+//                val photos = task.getResult()
+//                // Get the PlacePhotoMetadataBuffer (metadata for all of the photos).
+//                val photoMetadataBuffer = photos.getPhotoMetadata()
+//                // Get the first photo in the list.
+//                val photoMetadata = photoMetadataBuffer.get(0)
+//                // Get the attribution text.
+//                val attribution = photoMetadata.getAttributions()
+//                // Get a full-size bitmap for the photo.
+//                val photoResponse = mGeoDataClient!!.getPhoto(photoMetadata)
+//                photoResponse?.addOnCompleteListener(object : OnCompleteListener<PlacePhotoResponse> {
+//                    override fun onComplete(@NonNull task: Task<PlacePhotoResponse>) {
+//                        val photo = task.getResult()
+//                        val bitmap = photo.getBitmap()
+//                        imageView.setImageBitmap(bitmap)
+//                    }
+//                })
+//            }
+//        })
+//    }
 
     companion object {
         /**

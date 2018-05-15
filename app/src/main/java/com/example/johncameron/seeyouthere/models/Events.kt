@@ -13,6 +13,7 @@ class Events() {
     var attending: HashMap<String, String>? = null
     var eventDetails: String? = null
     var eventBring: String? = null
+    var eventImage: String? = null
 
 
 //    constructor(eventHost: String, eventName: String, eventLocation: String,
