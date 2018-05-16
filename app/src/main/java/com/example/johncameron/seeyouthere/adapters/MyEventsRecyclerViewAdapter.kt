@@ -39,7 +39,7 @@ class MyEventsRecyclerViewAdapter(databaseQuery: DatabaseReference, var context:
 
     override fun populateViewHolder(myEventsViewHolder: ViewHolder?, event: Events?, position: Int) {
         var eventId = getRef(position).key
-        
+
 
         mCurrentUser = FirebaseAuth.getInstance().currentUser
 

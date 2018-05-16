@@ -11,6 +11,7 @@ import android.net.Uri
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentActivity
+import android.support.v4.app.FragmentManager
 import android.text.TextUtils
 
 import android.util.Log
@@ -225,7 +226,6 @@ class CreateEventFragment : Fragment() {
         }
 
 
-
         accountCreateEventBtn.setOnClickListener {
 
             var eventName = newEventName.text.toString().trim()
@@ -240,6 +240,9 @@ class CreateEventFragment : Fragment() {
                     && !TextUtils.isEmpty(details) && !TextUtils.isEmpty(date)
                     && !TextUtils.isEmpty(time)) {
                 createEvent(eventHost, eventName, eventLocation, details, date, time, attend, image)
+                fragmentManager!!.primaryNavigationFragment
+                Toast.makeText(context, "Event created successfully!", Toast.LENGTH_LONG)
+                        .show()
 
             } else {
                 Toast.makeText(context, "Please fill out the fields", Toast.LENGTH_LONG)
@@ -382,6 +385,8 @@ class CreateEventFragment : Fragment() {
         mDatabase!!.setValue(eventObject)
         mDatabase!!.child("attending").push().setValue(attend)
 
+
+
     }
 
     override fun onDetach() {
@@ -400,6 +405,7 @@ class CreateEventFragment : Fragment() {
      * (http://developer.android.com/training/basics/fragments/communicating.html)
      * for more information.
      */
+
     interface OnFragmentInteractionListener {
 
         fun onFragmentInteraction(uri: Uri)

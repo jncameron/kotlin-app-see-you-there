@@ -70,7 +70,7 @@
 
                         <TextView
                             android:id="@+id/browseEventDate"
-                            android:layout_width="wrap_content"
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:background="@color/colorPrimaryDark"
                             android:paddingLeft="3dp"
@@ -84,7 +84,7 @@
 
                         <TextView
                             android:id="@+id/browseEventTime"
-                            android:layout_width="wrap_content"
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:paddingLeft="3dp"
                             android:paddingRight="3dp"
