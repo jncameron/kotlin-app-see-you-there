@@ -49,6 +49,7 @@ class ProfileActivity : AppCompatActivity() {
                 var studying = dataSnapshot!!.child("studying").value.toString()
                 var interests = dataSnapshot!!.child("interested_in").value.toString()
                 var age = dataSnapshot!!.child("age").value.toString()
+                var bio = dataSnapshot!!.child("bio").value.toString()
 
                 profileName.text = displayName
                 profileAge.text = age
@@ -56,6 +57,7 @@ class ProfileActivity : AppCompatActivity() {
                 profileLanguage.text = language
                 profileStudying.text = studying
                 profileInterests.text = interests
+                profileBio.text = bio
 
 
                 Picasso.with(this@ProfileActivity)

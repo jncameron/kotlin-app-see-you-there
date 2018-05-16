@@ -40,6 +40,9 @@ class UserInfoActivity : AppCompatActivity() {
         var oldEducation = intent.extras.get("education")
         educationUpdateEt.setHint(oldEducation.toString())
 
+        var oldBio = intent.extras.get("bio")
+        bioUpdateEt.setHint(oldBio.toString())
+
         var oldEap = intent.extras.get("eap")
         eapUpdateEt.setHint(oldEap.toString())
 
@@ -174,6 +177,35 @@ class UserInfoActivity : AppCompatActivity() {
                         } else {
 
                             Toast.makeText(this, "Interests Not Updated!", Toast.LENGTH_LONG)
+                                    .show()
+
+                        }
+                    }
+
+        }
+
+        bioUpdateBtn.setOnClickListener {
+
+
+            mCurrentUser = FirebaseAuth.getInstance().currentUser
+            var userId = mCurrentUser!!.uid
+
+            mDatabase = FirebaseDatabase.getInstance().reference
+                    .child("Users")
+                    .child(userId)
+
+            var bio = bioUpdateEt.text.toString().trim()
+
+            mDatabase!!.child("bio")
+                    .setValue(bio).addOnCompleteListener { task: Task<Void> ->
+                        if (task.isSuccessful) {
+                            Toast.makeText(this, "Bio Updated Successfully!", Toast.LENGTH_LONG)
+                                    .show()
+                            startActivity(Intent(this, SettingsActivity::class.java))
+
+                        } else {
+
+                            Toast.makeText(this, "Bio Not Updated!", Toast.LENGTH_LONG)
                                     .show()
 
                         }

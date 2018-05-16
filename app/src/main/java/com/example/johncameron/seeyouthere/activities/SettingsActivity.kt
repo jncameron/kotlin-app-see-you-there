@@ -67,6 +67,7 @@ class SettingsActivity : AppCompatActivity() {
                 var userLanguage = dataSnapshot!!.child("language").value
                 var userAge = dataSnapshot!!.child("age").value
                 var userInterests = dataSnapshot!!.child("interested_in").value
+                var bio = dataSnapshot!!.child("bio").value
                 var thumbnail = dataSnapshot!!.child("thumb_image").value
 
                 settingsDisplayName.text = displayName.toString()
@@ -75,6 +76,7 @@ class SettingsActivity : AppCompatActivity() {
                 settingsLanguage.text = userLanguage.toString()
                 settingsAge.text = userAge.toString()
                 settingsInterests.text = userInterests.toString()
+                settingsBio.text = bio.toString()
 
                 if (!image!!.equals("default")) {
                     Picasso.with(applicationContext)
@@ -100,6 +102,7 @@ class SettingsActivity : AppCompatActivity() {
             intent.putExtra("eap", settingsEap.text.toString().trim())
             intent.putExtra("language", settingsLanguage.text.toString().trim())
             intent.putExtra("interests", settingsInterests.text.toString().trim())
+            intent.putExtra("bio", settingsBio.text.toString().trim())
             startActivity(intent)
 
 
