@@ -83,7 +83,8 @@ class EventActivity : AppCompatActivity(), OnMapReadyCallback {
             override fun onDataChange(dataSnapshot: DataSnapshot?) {
 
                 var eventName = dataSnapshot!!.child("Events").child(eventId).child("eventName").value.toString()
-                var eventHost = dataSnapshot!!.child("Events").child(eventId).child("eventHost").value.toString()
+                var eventImage = dataSnapshot!!.child("Events").child(eventId).child("eventImage").value.toString()
+                var eventDetails = dataSnapshot!!.child("Events").child(eventId).child("eventDetails").value.toString()
                 eventLocation = dataSnapshot!!.child("Events").child(eventId).child("eventLocation").value.toString()
 
                 val lat: Double
@@ -97,7 +98,7 @@ class EventActivity : AppCompatActivity(), OnMapReadyCallback {
                 val sydney = LatLng(lat, long)
                 mMap.addMarker(MarkerOptions().position(sydney).title(eventLocation))
                 //  mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney))
-                mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(sydney, 15.0f))
+                mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(sydney, 17.0f))
 
 
                 var attendingUsers: DataSnapshot = dataSnapshot!!.child("Events").child(eventId).child("attending")
@@ -109,9 +110,14 @@ class EventActivity : AppCompatActivity(), OnMapReadyCallback {
 
                 }
 
+                Picasso.with(this@EventActivity)
+                        .load(eventImage)
+                        .placeholder(R.drawable.echopoint)
+                        .into(heroEventImage)
+
                 //find users with same language, EAP Level, education, intestest
                 userId1 = attendingUsersList[0]
-                var eapLevel = dataSnapshot!!.child("Users").child(userId1).child("eap")?.value.toString()
+                var eapLevel = dataSnapshot!!.child("Users").child(mCurrentUser!!.uid).child("eap")?.value.toString()
 
                 var sameEap = 0
                 for (user in attendingUsersList) {
@@ -127,7 +133,7 @@ class EventActivity : AppCompatActivity(), OnMapReadyCallback {
 
 
 
-                var language = dataSnapshot!!.child("Users").child(userId1).child("language")?.value.toString()
+                var language = dataSnapshot!!.child("Users").child(mCurrentUser!!.uid).child("language")?.value.toString()
                 var sameLanguage = 0
                 for (user in attendingUsersList) {
                     if (dataSnapshot!!.child("Users").child(user).child("language").value.toString() == language) {
@@ -139,7 +145,7 @@ class EventActivity : AppCompatActivity(), OnMapReadyCallback {
                 language = language + " Speakers"
                 languageAttendingText.text = language
 
-                var education = dataSnapshot!!.child("Users").child(userId1).child("studying")?.value.toString()
+                var education = dataSnapshot!!.child("Users").child(mCurrentUser!!.uid).child("studying")?.value.toString()
                 var sameEducation = 0
                 for (user in attendingUsersList) {
                     if (dataSnapshot!!.child("Users").child(user).child("studying").value.toString() == education) {
@@ -150,7 +156,7 @@ class EventActivity : AppCompatActivity(), OnMapReadyCallback {
                 education = education + " Students"
                 EducationAttendingText.text = education
 
-                var interests = dataSnapshot!!.child("Users").child(userId1).child("interested_in")?.value.toString()
+                var interests = dataSnapshot!!.child("Users").child(mCurrentUser!!.uid).child("interested_in")?.value.toString()
                 var sameInterests = 0
                 for (user in attendingUsersList) {
                     if (dataSnapshot!!.child("Users").child(user).child("interested_in").value.toString() == interests) {
@@ -292,6 +298,7 @@ class EventActivity : AppCompatActivity(), OnMapReadyCallback {
 
                 singleEventTitle.text = eventName
                 singleEventLocation.text = eventLocation
+                singleEventDetails.text = eventDetails
 
 
 

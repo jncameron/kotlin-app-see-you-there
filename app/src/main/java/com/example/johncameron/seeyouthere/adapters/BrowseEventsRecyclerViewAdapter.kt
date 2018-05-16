@@ -69,7 +69,11 @@ class BrowseEventsRecyclerViewAdapter(databaseQuery: DatabaseReference, var cont
 
             eventName.text = event.eventName
             eventLocation.text = event.eventLocation
-            eventDate.text = event.eventDate
+
+            var eventDateFormatted = event.eventDate
+            eventDateFormatted = eventDateFormatted!!.replaceFirst("\\s".toRegex(), "\n")
+
+            eventDate.text = eventDateFormatted
             eventTime.text = event.eventTime
             attendees.text = event.attending?.size.toString()
             Picasso.with(context).load(event.eventImage).into(itemView.findViewById<ImageView>(R.id.browseEventImage))

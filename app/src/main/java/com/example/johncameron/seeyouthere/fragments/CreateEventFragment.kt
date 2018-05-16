@@ -39,6 +39,7 @@ import com.google.firebase.storage.UploadTask
 import com.squareup.picasso.Picasso
 import com.theartofdev.edmodo.cropper.CropImage
 import io.reactivex.annotations.NonNull
+import kotlinx.android.synthetic.main.activity_event.*
 import kotlinx.android.synthetic.main.fragment_create_event.*
 import java.io.ByteArrayOutputStream
 import java.io.File
@@ -127,6 +128,12 @@ class CreateEventFragment : Fragment() {
         var cal = Calendar.getInstance()
         var eventHost = ""
 
+        mCurrentUser = FirebaseAuth.getInstance().currentUser
+        var userId = mCurrentUser!!.uid
+
+
+
+
         textViewTime = newEventTime
         val timeSetListener = TimePickerDialog.OnTimeSetListener { timePicker, hour, minute ->
             cal.set(Calendar.HOUR_OF_DAY, hour)
@@ -176,8 +183,7 @@ class CreateEventFragment : Fragment() {
 
         textViewDate = newEventDate
 
-        mCurrentUser = FirebaseAuth.getInstance().currentUser
-        var userId = mCurrentUser!!.uid
+
 
         mDatabase = FirebaseDatabase.getInstance().reference
                 .child("Users")

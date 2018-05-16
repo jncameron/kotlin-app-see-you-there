@@ -7,9 +7,20 @@
     android:background="@drawable/bg3"
     tools:context=".activities.EventActivity">
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/colorPrimaryDark"
+        android:orientation="vertical"
+        app:layout_constraintTop_toBottomOf="@id/mainCard">
+
+
+    </LinearLayout>
+
     <android.support.v7.widget.CardView
 
         android:layout_width="match_parent"
+        android:id="@+id/mainCard"
         android:layout_height="match_parent"
         app:cardBackgroundColor="@color/lightBg"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -24,7 +35,7 @@
             <ImageView
                 android:id="@+id/browseEventImage"
                 android:layout_width="wrap_content"
-                android:layout_height="199dp"
+                android:layout_height="206dp"
                 android:adjustViewBounds="true"
                 android:cropToPadding="false"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -35,7 +46,7 @@
             <android.support.v7.widget.CardView
                 android:id="@+id/hostCard"
                 android:layout_width="match_parent"
-                android:layout_height="80dp"
+                android:layout_height="70dp"
                 android:layout_marginTop="1dp"
                 android:background="@drawable/textview_border"
                 android:elevation="4dp"
@@ -46,30 +57,60 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
 
-                    <de.hdodenhof.circleimageview.CircleImageView
-                        android:id="@+id/eventAttendingUserProfile"
-                        android:layout_width="50dp"
-                        android:layout_height="50dp"
-                        android:layout_marginBottom="12dp"
-                        android:layout_marginStart="8dp"
-                        android:layout_marginTop="12dp"
-                        android:src="@drawable/profile_img"
-                        app:civ_border_color="@color/colorPrimaryDark"
-                        app:civ_border_width="2dp"
-                        app:layout_constraintBottom_toBottomOf="parent"
+                    <LinearLayout
+                        android:id="@+id/timeDateCard"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="16dp"
+                        android:layout_marginTop="8dp"
+                        android:background="@drawable/textview_border"
+                        android:orientation="vertical"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
+                        app:layout_constraintTop_toTopOf="parent">
+
+                        <TextView
+                            android:id="@+id/browseEventDate"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:background="@color/colorPrimaryDark"
+                            android:paddingLeft="3dp"
+                            android:paddingRight="3dp"
+                            android:text="sample date"
+                            android:textAlignment="center"
+                            android:textColor="#FFF"
+                            android:textSize="14sp"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <TextView
+                            android:id="@+id/browseEventTime"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:paddingLeft="3dp"
+                            android:paddingRight="3dp"
+                            android:text="sample time"
+                            android:textAlignment="viewStart"
+                            android:textColor="#000"
+
+                            android:textSize="11sp"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/browseEventDate"
+                            tools:layout_editor_absoluteX="66dp" />
+                    </LinearLayout>
+
 
                     <TextView
                         android:id="@+id/browseEventTitle"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        android:layout_height="20dp"
                         android:layout_marginStart="8dp"
-                        android:layout_marginTop="4dp"
+                        android:layout_marginTop="12dp"
                         android:text="Event Name"
                         android:textColor="@color/colorPrimaryDark"
                         android:textSize="14sp"
-                        app:layout_constraintStart_toEndOf="@+id/eventAttendingUserProfile"
+
+                        android:textStyle="bold"
+                        app:layout_constraintStart_toEndOf="@id/timeDateCard"
                         app:layout_constraintTop_toTopOf="parent" />
 
                     <TextView
@@ -81,37 +122,17 @@
                         android:text="location"
                         android:textColor="#000"
                         android:textSize="12sp"
-                        app:layout_constraintStart_toEndOf="@+id/eventAttendingUserProfile"
+                        android:textStyle="bold"
+                        app:layout_constraintStart_toEndOf="@id/timeDateCard"
                         app:layout_constraintTop_toBottomOf="@+id/browseEventTitle" />
 
-                    <TextView
-                        android:id="@+id/browseEventDate"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="8dp"
-                        android:text="sample date"
-                        android:textColor="#000"
-                        android:textSize="10sp"
-                        app:layout_constraintStart_toEndOf="@+id/eventAttendingUserProfile"
-                        app:layout_constraintTop_toBottomOf="@+id/browseEventLocation" />
-
-                    <TextView
-                        android:id="@+id/browseEventTime"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="8dp"
-                        android:text="sample time"
-                        android:textColor="#000"
-                        android:textSize="10sp"
-                        app:layout_constraintStart_toEndOf="@+id/eventAttendingUserProfile"
-                        app:layout_constraintTop_toBottomOf="@+id/browseEventDate" />
 
                     <TextView
                         android:id="@+id/attending"
                         android:layout_width="30dp"
                         android:layout_height="wrap_content"
                         android:layout_marginEnd="8dp"
-                        android:layout_marginTop="12dp"
+                        android:layout_marginTop="20dp"
                         android:paddingBottom="10dp"
                         android:text="0"
                         android:textAlignment="center"
@@ -125,7 +146,7 @@
                         android:layout_width="25dp"
                         android:layout_height="25dp"
                         android:layout_marginEnd="8dp"
-                        android:layout_marginTop="12dp"
+                        android:layout_marginTop="20dp"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintTop_toTopOf="parent"
                         app:srcCompat="@drawable/ic_people_black_24dp" />

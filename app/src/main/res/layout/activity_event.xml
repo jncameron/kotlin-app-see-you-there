@@ -1,7 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
+
+
+
+
+<android.support.constraint.ConstraintLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/bg3"
@@ -22,9 +33,11 @@
             android:layout_height="match_parent">
 
             <ImageView
-                android:id="@+id/eventImage"
-                android:layout_width="wrap_content"
-                android:layout_height="199dp"
+                android:id="@+id/heroEventImage"
+                android:layout_width="match_parent"
+                android:layout_height="206dp"
+                android:adjustViewBounds="false"
+                android:cropToPadding="false"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
@@ -35,11 +48,10 @@
                 android:id="@+id/hostCard"
                 android:layout_width="match_parent"
                 android:layout_height="70dp"
-                android:layout_marginTop="1dp"
                 android:background="@drawable/textview_border"
                 android:elevation="4dp"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/eventImage">
+                app:layout_constraintTop_toBottomOf="@+id/heroEventImage">
 
                 <android.support.constraint.ConstraintLayout
                     android:layout_width="match_parent"
@@ -134,9 +146,7 @@
                 android:id="@+id/attendingCard"
                 android:layout_width="0dp"
                 android:layout_height="100dp"
-                android:layout_marginBottom="2dp"
                 android:layout_marginTop="2dp"
-                app:layout_constraintBottom_toTopOf="@+id/mapCard"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/hostCard">
@@ -341,6 +351,29 @@
                 android:orientation="vertical"
                 app:layout_constraintGuide_begin="20dp" />
 
+            <android.support.v7.widget.CardView
+                android:id="@+id/detailsCard"
+                android:layout_width="0dp"
+                android:layout_height="100dp"
+                android:layout_marginTop="2dp"
+                app:layout_constraintBottom_toTopOf="@id/mapCard"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="1.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/attendingCard">
+
+                <TextView
+                    android:id="@+id/singleEventDetails"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="20dp"
+                    android:text="Event Details - there are lots of details here"
+                    android:textAlignment="viewStart"
+                    android:textColor="@color/colorPrimaryDark"
+                    android:textSize="14sp" />
+
+            </android.support.v7.widget.CardView>
+
 
             <android.support.v7.widget.CardView
                 android:id="@+id/mapCard"
@@ -348,10 +381,11 @@
                 android:layout_height="0dp"
                 android:layout_marginBottom="8dp"
                 android:layout_marginTop="2dp"
-                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintBottom_toBottomOf="@id/guideline8"
                 app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/attendingCard">
+                app:layout_constraintTop_toBottomOf="@+id/detailsCard">
 
 
                 <fragment
@@ -363,13 +397,8 @@
             </android.support.v7.widget.CardView>
 
 
-            <com.google.android.gms.maps.MapView
-                android:id="@+id/eventMapView"
-                android:layout_width="0dp"
-                android:layout_height="0dp"
-                android:layout_marginBottom="8dp"
-                android:layout_marginEnd="8dp"
-                android:layout_marginStart="8dp" />
+
+
 
             <android.support.constraint.Guideline
                 android:id="@+id/guideline2"
@@ -390,7 +419,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                app:layout_constraintGuide_begin="225dp" />
+                app:layout_constraintGuide_begin="800dp" />
 
             <android.support.constraint.Guideline
                 android:id="@+id/guideline3"
@@ -419,3 +448,5 @@
         app:layout_constraintGuide_begin="155dp" />
 
 </android.support.constraint.ConstraintLayout>
+
+</ScrollView>
