@@ -9,8 +9,10 @@ import android.view.View
 import android.view.ViewGroup
 import com.example.johncameron.seeyouthere.R
 import com.example.johncameron.seeyouthere.adapters.MyEventsRecyclerViewAdapter
+import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.ValueEventListener
 import kotlinx.android.synthetic.main.fragment_my_events_list.*
 
 
@@ -30,10 +32,12 @@ class MyEventsFragment : Fragment() {
 
         mEventDatabase = FirebaseDatabase.getInstance().reference.child("Events")
 
+
       //  myEventRecycler.setHasFixedSize(true)
 
         myEventRecycler.layoutManager = linearLayoutManager
         myEventRecycler.adapter = MyEventsRecyclerViewAdapter(mEventDatabase!!, this.context!!)
     }
+
 
 }

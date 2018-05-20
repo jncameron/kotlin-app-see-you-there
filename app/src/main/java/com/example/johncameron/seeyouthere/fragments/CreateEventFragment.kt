@@ -3,6 +3,7 @@ package com.example.johncameron.seeyouthere.fragments
 import android.app.Activity
 import android.app.Activity.RESULT_OK
 import android.app.DatePickerDialog
+import android.app.FragmentTransaction
 import android.app.TimePickerDialog
 import android.content.Context
 import android.content.Intent
@@ -99,6 +100,12 @@ class CreateEventFragment : Fragment() {
             param2 = it.getString(ARG_PARAM2)
         }
 
+        fun onSelectFragment(v: View) {
+            var newFragment: Fragment
+
+            newFragment = MyEventsFragment()
+
+        }
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
@@ -228,6 +235,7 @@ class CreateEventFragment : Fragment() {
 
         accountCreateEventBtn.setOnClickListener {
 
+
             var eventName = newEventName.text.toString().trim()
             var eventLocation = newEventLocation.text.toString().trim()
             var details = newEventDetails.text.toString().trim()
@@ -236,13 +244,18 @@ class CreateEventFragment : Fragment() {
             var attend = userId.toString()
             var image = downloadUrl
 
+
             if (!TextUtils.isEmpty(eventName) && !TextUtils.isEmpty(eventLocation)
                     && !TextUtils.isEmpty(details) && !TextUtils.isEmpty(date)
                     && !TextUtils.isEmpty(time)) {
                 createEvent(eventHost, eventName, eventLocation, details, date, time, attend, image)
-                fragmentManager!!.primaryNavigationFragment
+
                 Toast.makeText(context, "Event created successfully!", Toast.LENGTH_LONG)
                         .show()
+                val transaction = fragmentManager!!.beginTransaction()
+                val fragment = MyEventsFragment()
+                transaction.replace(R.id.fragment_holder, fragment)
+                transaction.commit()
 
             } else {
                 Toast.makeText(context, "Please fill out the fields", Toast.LENGTH_LONG)

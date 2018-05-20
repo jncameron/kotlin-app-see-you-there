@@ -175,7 +175,7 @@
                     android:adjustViewBounds="false"
                     android:cropToPadding="false"
                     android:scaleType="fitStart"
-                    app:srcCompat="@drawable/ic_school_black_24dp" />
+                    app:srcCompat="@drawable/ic_level" />
 
                 <TextView
                     android:id="@+id/settingsEap"
