@@ -39,4 +39,4 @@ class UsersFragment : Fragment() {
 
     }
 
-}// Required empty public constructor
+}

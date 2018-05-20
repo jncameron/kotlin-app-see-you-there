@@ -30,7 +30,6 @@ class BrowseEventsFragment : Fragment() {
 
         mEventDatabase = FirebaseDatabase.getInstance().reference.child("Events")
 
-        //  myEventRecycler.setHasFixedSize(true)
 
         browseEventsRecycler.layoutManager = linearLayoutManager
         browseEventsRecycler.adapter = BrowseEventsRecyclerViewAdapter(mEventDatabase!!, this.context!!)

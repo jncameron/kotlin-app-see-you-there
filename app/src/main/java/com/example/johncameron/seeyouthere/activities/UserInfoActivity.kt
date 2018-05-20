@@ -12,7 +12,6 @@ import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 import kotlinx.android.synthetic.main.activity_user_info.*
 import com.example.johncameron.seeyouthere.R
-import org.w3c.dom.Text
 
 class UserInfoActivity : AppCompatActivity() {
     var mDatabase: DatabaseReference? = null

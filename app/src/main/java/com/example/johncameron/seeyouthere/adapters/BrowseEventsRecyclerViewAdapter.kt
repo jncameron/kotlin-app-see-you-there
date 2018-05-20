@@ -6,17 +6,13 @@ package com.example.johncameron.seeyouthere.adapters
 
 import android.content.Context
 import android.content.Intent
-import android.net.Uri
 import android.support.v7.widget.RecyclerView
 import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
-import android.widget.Toast
 import com.example.johncameron.seeyouthere.R
-import com.example.johncameron.seeyouthere.activities.ChatActivity
 import com.example.johncameron.seeyouthere.activities.EventActivity
 import com.example.johncameron.seeyouthere.models.Events
-import com.example.johncameron.seeyouthere.models.Users
 import com.firebase.ui.database.FirebaseRecyclerAdapter
 import com.google.firebase.database.DatabaseReference
 import com.squareup.picasso.Picasso
@@ -44,7 +40,6 @@ class BrowseEventsRecyclerViewAdapter(databaseQuery: DatabaseReference, var cont
             var eventIntent = Intent(context, EventActivity::class.java)
             eventIntent.putExtra("eventId", eventId)
             context.startActivity(eventIntent)
- //           Toast.makeText(context, eventId, Toast.LENGTH_LONG).show()
         }
 
 
@@ -62,7 +57,6 @@ class BrowseEventsRecyclerViewAdapter(databaseQuery: DatabaseReference, var cont
             var eventDate = itemView.findViewById<TextView>(R.id.browseEventDate)
             var eventTime = itemView.findViewById<TextView>(R.id.browseEventTime)
             var attendees = itemView.findViewById<TextView>(R.id.attending)
-        //    var eventImage = itemView.findViewById<ImageView>(R.id.browseEventImage)
 
 
 
@@ -78,7 +72,6 @@ class BrowseEventsRecyclerViewAdapter(databaseQuery: DatabaseReference, var cont
             attendees.text = event.attending?.size.toString()
             Picasso.with(context).load(event.eventImage).into(itemView.findViewById<ImageView>(R.id.browseEventImage))
 
-          //  eventImage.setImageURI(Uri.parse(event.eventImage))
 
 
         }

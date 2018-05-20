@@ -7,14 +7,10 @@ package com.example.johncameron.seeyouthere.adapters
 import android.content.Context
 import android.content.Intent
 import android.support.v7.widget.RecyclerView
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
-import android.widget.Toast
 import com.example.johncameron.seeyouthere.R
-import com.example.johncameron.seeyouthere.R.id.myEventTitle
 import com.example.johncameron.seeyouthere.activities.EventActivity
 import com.example.johncameron.seeyouthere.models.Events
 import com.firebase.ui.database.FirebaseRecyclerAdapter
@@ -33,9 +29,7 @@ class MyEventsRecyclerViewAdapter(databaseQuery: DatabaseReference, var context:
 
     var mCurrentUser: FirebaseUser? = null
 
-    override fun getItemCount(): Int {
-        return super.getItemCount()
-    }
+
 
     override fun populateViewHolder(myEventsViewHolder: ViewHolder?, event: Events?, position: Int) {
         var eventId = getRef(position).key
@@ -43,24 +37,15 @@ class MyEventsRecyclerViewAdapter(databaseQuery: DatabaseReference, var context:
 
         mCurrentUser = FirebaseAuth.getInstance().currentUser
 
+        myEventsViewHolder!!.bindView(event!!, context)
+        myEventsViewHolder.itemView.setOnClickListener {
 
 
 
-            myEventsViewHolder!!.bindView(event!!, context)
-            myEventsViewHolder.itemView.setOnClickListener {
-
-
-
-                var eventIntent = Intent(context, EventActivity::class.java)
-                eventIntent.putExtra("eventId", eventId)
-                context.startActivity(eventIntent)
-                //           Toast.makeText(context, eventId, Toast.LENGTH_LONG).show()
-            }
-
-
-
-
-
+            var eventIntent = Intent(context, EventActivity::class.java)
+            eventIntent.putExtra("eventId", eventId)
+            context.startActivity(eventIntent)
+        }
 
     }
 
@@ -89,8 +74,6 @@ class MyEventsRecyclerViewAdapter(databaseQuery: DatabaseReference, var context:
             eventTime.text = event.eventTime
             attendees.text = event.attending?.size.toString()
             Picasso.with(context).load(event.eventImage).into(itemView.findViewById<ImageView>(R.id.myEventImage))
-
-
 
 
         }

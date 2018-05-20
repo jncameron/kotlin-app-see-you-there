@@ -19,10 +19,6 @@ class ProfileActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_profile)
 
-       // supportActionBar!!.hide()
-
-//        supportActionBar!!.title = "Profile"
-//        supportActionBar!!.setDisplayHomeAsUpEnabled(true)
 
         if (intent.extras != null) {
             userId = intent.extras.get("userId").toString()

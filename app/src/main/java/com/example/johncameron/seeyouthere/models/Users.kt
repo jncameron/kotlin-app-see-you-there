@@ -15,12 +15,5 @@ class Users() {
     var education: String? = null
     var interests: String? = null
 
-//   constructor(display_name: String, image: String,
-//               thumb_image: String, user_status: String): this() {
-//        this.display_name = display_name
-//        this.image = image
-//        this.thumb_image = thumb_image
-//        this.user_status = user_status
-//
-//   }
+
 }

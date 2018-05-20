@@ -223,7 +223,6 @@ class SettingsActivity : AppCompatActivity() {
                 Log.d("Error", error.toString())
             }
         }
-//        super.onActivityResult(requestCode, resultCode, data)
     }
 
 

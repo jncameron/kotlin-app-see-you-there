@@ -47,7 +47,6 @@ class LoginActivity : AppCompatActivity() {
                     task: Task<AuthResult> ->
                     if (task.isSuccessful) {
 
-                        //paulo@gmail.com split--> [paulo],[gmail.com]
 
                         var username = email.split("@")[0]
                         var dashboardIntent = Intent(this, Main2Activity::class.java)

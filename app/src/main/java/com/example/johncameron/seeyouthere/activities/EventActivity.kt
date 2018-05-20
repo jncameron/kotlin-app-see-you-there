@@ -1,8 +1,8 @@
 package com.example.johncameron.seeyouthere.activities
 
 import android.location.Geocoder
-import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import android.support.v7.app.AppCompatActivity
 import android.view.View
 import com.example.johncameron.seeyouthere.R
 import com.google.android.gms.maps.CameraUpdateFactory
@@ -15,9 +15,7 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.database.*
 import com.squareup.picasso.Picasso
-import de.hdodenhof.circleimageview.CircleImageView
 import kotlinx.android.synthetic.main.activity_event.*
-import kotlinx.android.synthetic.main.activity_profile.*
 
 class EventActivity : AppCompatActivity(), OnMapReadyCallback {
 
@@ -36,9 +34,6 @@ class EventActivity : AppCompatActivity(), OnMapReadyCallback {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_event)
-//        val mapView = eventMapView
-//        mapView.getMapAsync(this)
-//        mapView.onCreate(savedInstanceState)
 
 
 

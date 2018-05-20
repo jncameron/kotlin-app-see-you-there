@@ -19,6 +19,4 @@ class ChatsFragment : Fragment() {
         return return inflater!!.inflate(R.layout.fragment_chats, container, false)
     }
 
-
-
-}// Required empty public constructor
+}

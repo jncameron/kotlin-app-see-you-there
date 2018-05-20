@@ -261,16 +261,11 @@ class CreateEventFragment : Fragment() {
                 Toast.makeText(context, "Please fill out the fields", Toast.LENGTH_LONG)
                         .show()
             }
-
-
         }
-
-
     }
 
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-    //    super.onActivityResult(requestCode, resultCode, data)
 
         if (requestCode == PLACE_PICKER_REQUEST && resultCode == RESULT_OK) {
                 val place = PlacePicker.getPlace(context, data!!)
@@ -306,21 +301,10 @@ class CreateEventFragment : Fragment() {
                 var userId = mCurrentUser!!.uid
 
 
-                //We upload images to firebase
-                var byteArray = ByteArrayOutputStream()
-//                thumbBitmap.compress(Bitmap.CompressFormat.JPEG,  100,
-//                        byteArray)
-//                var thumbByteArray: ByteArray
-//                thumbByteArray = byteArray.toByteArray()
                 imageId = UUID.randomUUID().toString()
 
                 var filePath = mStorageRef!!.child("event_images")
                         .child( imageId + ".jpg")
-
-                //Create another directory for thumbimages ( smaller, compressed images)
-//                var thumbFilePath = mStorageRef!!.child("chat_profile_images")
-//                        .child("thumbs")
-//                        .child(userId + ".jpg")
 
 
                 filePath.putFile(resultUri)
@@ -328,16 +312,8 @@ class CreateEventFragment : Fragment() {
                             task: Task<UploadTask.TaskSnapshot> ->
                             if (task.isSuccessful) {
 
-                                //Let's get the pic url
                                 downloadUrl = task.result.downloadUrl.toString()
 
-                                //Upload Task
-//                                var uploadTask: UploadTask = thumbFilePath
-//                                        .putBytes(thumbByteArray)
-//
-//                                uploadTask.addOnCompleteListener{
-//                                    task: Task<UploadTask.TaskSnapshot> ->
-//                                   var thumbUrl = task.result.downloadUrl.toString()
 
                                     if (task.isSuccessful) {
 
@@ -366,8 +342,7 @@ class CreateEventFragment : Fragment() {
                             }
                         }
             }else if (resultCode === CropImage.CROP_IMAGE_ACTIVITY_RESULT_ERROR_CODE) {
-//                val error = result.error
-//                Log.d("Error", error.toString())
+
             }
 
 
@@ -407,49 +382,11 @@ class CreateEventFragment : Fragment() {
         listener = null
     }
 
-    /**
-     * This interface must be implemented by activities that contain this
-     * fragment to allow an interaction in this fragment to be communicated
-     * to the activity and potentially other fragments contained in that
-     * activity.
-     *
-     *
-     * See the Android Training lesson [Communicating with Other Fragments]
-     * (http://developer.android.com/training/basics/fragments/communicating.html)
-     * for more information.
-     */
 
     interface OnFragmentInteractionListener {
 
         fun onFragmentInteraction(uri: Uri)
     }
-
-//    private fun getPhotos() {
-//        Toast.makeText(context, "Hi Photo", Toast.LENGTH_SHORT).show()
-//        val placeId = "ChIJa147K9HX3IAR-lwiGIQv9i4"
-//        val photoMetadataResponse = mGeoDataClient!!.getPlacePhotos(placeId)
-//        photoMetadataResponse?.addOnCompleteListener(object : OnCompleteListener<PlacePhotoMetadataResponse> {
-//            override fun onComplete(@NonNull task: Task<PlacePhotoMetadataResponse>) {
-//                // Get the list of photos.
-//                val photos = task.getResult()
-//                // Get the PlacePhotoMetadataBuffer (metadata for all of the photos).
-//                val photoMetadataBuffer = photos.getPhotoMetadata()
-//                // Get the first photo in the list.
-//                val photoMetadata = photoMetadataBuffer.get(0)
-//                // Get the attribution text.
-//                val attribution = photoMetadata.getAttributions()
-//                // Get a full-size bitmap for the photo.
-//                val photoResponse = mGeoDataClient!!.getPhoto(photoMetadata)
-//                photoResponse?.addOnCompleteListener(object : OnCompleteListener<PlacePhotoResponse> {
-//                    override fun onComplete(@NonNull task: Task<PlacePhotoResponse>) {
-//                        val photo = task.getResult()
-//                        val bitmap = photo.getBitmap()
-//                        imageView.setImageBitmap(bitmap)
-//                    }
-//                })
-//            }
-//        })
-//    }
 
     companion object {
         /**

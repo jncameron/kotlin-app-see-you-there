@@ -16,14 +16,5 @@ class Events() {
     var eventImage: String? = null
 
 
-//    constructor(eventHost: String, eventName: String, eventLocation: String,
-//                attending: HashMap<String, String>): this() {
-//        this.eventHost = eventHost
-//        this.eventLocation = eventLocation
-//        this.eventName = eventName
-//        this.attending = attending
-//    }
-
-
 
 }

@@ -1,18 +1,12 @@
 package com.example.johncameron.seeyouthere.activities
 
 import android.content.Intent
-import android.graphics.Color
-import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import android.support.v7.app.AppCompatActivity
 import android.view.Menu
 import android.view.MenuItem
-import android.support.design.widget.BottomNavigationView;
-import android.support.design.widget.CoordinatorLayout;
-import android.support.v7.widget.Toolbar
 import com.example.johncameron.seeyouthere.R
-import com.example.johncameron.seeyouthere.adapters.SectionPagerAdapter
 import com.google.firebase.auth.FirebaseAuth
-import kotlinx.android.synthetic.main.activity_home.*
 
 
 class HomeActivity : AppCompatActivity() {
