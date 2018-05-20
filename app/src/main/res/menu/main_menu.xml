@@ -7,5 +7,5 @@
         android:title="@string/logout" />
     <item
         android:id="@+id/settingsId"
-        android:title="@string/settings" />
+        android:title="Profile" />
 </menu>
